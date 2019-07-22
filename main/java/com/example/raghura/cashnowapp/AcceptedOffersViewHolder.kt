@@ -16,10 +16,9 @@ class AcceptedOffersViewHolder (itemView: View, adapter: AcceptedOffersListAdapt
         }
     }
     fun bind (offer: Offer) {
-        amountTextView.text = offer.amount
-        distanceTextView.text = offer.distance
-        nameTextView.text = offer.name
-        timeTextView.text = "25 mins ago"
-
+        amountTextView.text = "${offer.amount} U.S Dollars"
+        distanceTextView.text = "${offer.distance} miles"
+        nameTextView.text = "${offer.name}"
+        timeTextView.text = "Posted 25 mins ago"
     }
 }

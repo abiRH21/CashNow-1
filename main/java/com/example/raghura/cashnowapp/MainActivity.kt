@@ -13,6 +13,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), MyOffersListFragment.OnOfferSelectedListener  , AcceptedOffersListFragment.OnOfferSelectedListenerAccepted , AvailableOffersListFragment.OnOfferSelectedListener {
     override fun onOfferSelected(offer: Offer) {
+
        Toast.makeText(this, offer.toString(), Toast.LENGTH_LONG).show()
         val offerFragment = OfferDetailFragment.newInstance(offer)
         val ft = supportFragmentManager.beginTransaction()
@@ -24,6 +25,7 @@ class MainActivity : AppCompatActivity(), MyOffersListFragment.OnOfferSelectedLi
         var switchTo : Fragment? = null
         when (item.itemId) {
             R.id.navigation_my_offers -> {
+                toolbar.title = "My Offers"
                 Toast.makeText(this,"Changed", Toast.LENGTH_LONG).show()
                switchTo = MyOffersListFragment()
                 if  ( switchTo != null) {
@@ -37,6 +39,7 @@ class MainActivity : AppCompatActivity(), MyOffersListFragment.OnOfferSelectedLi
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_available_offers -> {
+                toolbar.title = "Available Offers"
                 switchTo = AvailableOffersListFragment()
                 if  ( switchTo != null) {
                     val ft = supportFragmentManager.beginTransaction()
@@ -49,6 +52,7 @@ class MainActivity : AppCompatActivity(), MyOffersListFragment.OnOfferSelectedLi
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_accepted_offers -> {
+                toolbar.title = "Accepted Offers"
                 switchTo = AcceptedOffersListFragment()
                 if  ( switchTo != null) {
                     val ft = supportFragmentManager.beginTransaction()
@@ -61,6 +65,7 @@ class MainActivity : AppCompatActivity(), MyOffersListFragment.OnOfferSelectedLi
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_new_offers -> {
+                toolbar.title = "New Offer"
                 switchTo = NewOfferFragment()
                 if  ( switchTo != null) {
                     val ft = supportFragmentManager.beginTransaction()
@@ -78,6 +83,7 @@ class MainActivity : AppCompatActivity(), MyOffersListFragment.OnOfferSelectedLi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        toolbar.title = "Available Offers"
         setSupportActionBar(toolbar)
 //
 //        fab.setOnClickListener { view ->
@@ -85,6 +91,17 @@ class MainActivity : AppCompatActivity(), MyOffersListFragment.OnOfferSelectedLi
 //                    .setAction("Action", null).show()
 //        }
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
+        var switchTo : Fragment? = null
+
+        switchTo = AvailableOffersListFragment()
+        if  ( switchTo != null) {
+            val ft = supportFragmentManager.beginTransaction()
+            ft.replace(R.id.fragment_container, switchTo)
+            while (supportFragmentManager.backStackEntryCount > 0) {
+                supportFragmentManager.popBackStackImmediate()
+            }
+            ft.commit()
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -98,7 +115,21 @@ class MainActivity : AppCompatActivity(), MyOffersListFragment.OnOfferSelectedLi
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         return when (item.itemId) {
-            R.id.action_settings -> true
+            R.id.action_settings ->{
+                toolbar.title ="Settings"
+                var switchTo : Fragment? = null
+
+                switchTo = SettingsFragment()
+                if  ( switchTo != null) {
+                    val ft = supportFragmentManager.beginTransaction()
+                    ft.replace(R.id.fragment_container, switchTo)
+                    while (supportFragmentManager.backStackEntryCount > 0) {
+                        supportFragmentManager.popBackStackImmediate()
+                    }
+                    ft.commit()
+                }
+                true}
+
             else -> super.onOptionsItemSelected(item)
         }
     }

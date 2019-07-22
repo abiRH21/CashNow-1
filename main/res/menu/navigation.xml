@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
+
+    <item
+        android:id="@+id/navigation_available_offers"
+        android:icon="@drawable/ic_dehaze_black_24dp"
+        android:title="Available Offers" />
     <item
         android:id="@+id/navigation_my_offers"
-        android:icon="@drawable/ic_home_black_24dp"
+        android:icon="@drawable/ic_assignment_black_24dp"
         android:title="My offers" />
 
     <item
@@ -11,13 +16,10 @@
         android:icon="@drawable/ic_home_black_24dp"
         android:title="Accepted offers " />
 
-    <item
-        android:id="@+id/navigation_available_offers"
-        android:icon="@drawable/ic_home_black_24dp"
-        android:title="Available Offers" />
+
     <item
         android:id="@+id/navigation_new_offers"
-        android:icon="@drawable/ic_home_black_24dp"
+        android:icon="@drawable/ic_add_black_24dp"
         android:title="New Offers " />
 
 
