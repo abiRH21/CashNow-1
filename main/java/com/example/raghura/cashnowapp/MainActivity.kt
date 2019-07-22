@@ -56,7 +56,15 @@ class MainActivity : AppCompatActivity(), MyOffersListFragment.OnOfferSelectedLi
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_new_offers -> {
-                //message.setText(R.string.title_notifications)
+                switchTo = NewOfferFragment()
+                if  ( switchTo != null) {
+                    val ft = supportFragmentManager.beginTransaction()
+                    ft.replace(R.id.fragment_container, switchTo)
+                    while (supportFragmentManager.backStackEntryCount > 0) {
+                        supportFragmentManager.popBackStackImmediate()
+                    }
+                    ft.commit()
+                }
                 return@OnNavigationItemSelectedListener true
             }
         }

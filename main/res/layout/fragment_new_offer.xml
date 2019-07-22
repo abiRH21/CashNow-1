@@ -1,37 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="match_parent">
-
+<EditText
+    android:id="@+id/new_offer_currency"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_centerHorizontal="true"
+    android:hint="Currency"
+    android:textSize="30sp"
+    />
     <EditText
-        android:id="@+id/currency_text"
-        android:layout_width="193dp"
+        android:id="@+id/new_offer_amount"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
+        android:layout_below="@+id/new_offer_currency"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="150dp"
-        android:hint="Currency" />
-
-    <EditText
-        android:id="@+id/amount_text"
-        android:layout_width="193dp"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/currency_text"
-        android:layout_centerInParent="true"
-        android:layout_marginBottom="-62dp"
-        android:hint="Amount" />
-
+        android:hint="Amount "
+        android:textSize="30sp"
+        />
     <Button
-        android:id="@+id/button"
-        android:layout_width="235dp"
-        android:layout_height="92dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="70dp"
-        android:layout_marginLeft="70dp"
-        android:layout_marginBottom="92dp"
-        android:text="Post Offer" />
+        android:id="@+id/new_offer_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/new_offer_amount"
+        android:textSize="30sp"
+        android:text="Ok"/>
 </RelativeLayout>
