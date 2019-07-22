@@ -14,6 +14,11 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : AppCompatActivity(), MyOffersListFragment.OnOfferSelectedListener  , AcceptedOffersListFragment.OnOfferSelectedListenerAccepted , AvailableOffersListFragment.OnOfferSelectedListener {
     override fun onOfferSelected(offer: Offer) {
        Toast.makeText(this, offer.toString(), Toast.LENGTH_LONG).show()
+        val offerFragment = OfferDetailFragment.newInstance(offer)
+        val ft = supportFragmentManager.beginTransaction()
+        ft.replace(R.id.fragment_container, offerFragment)
+        ft.addToBackStack("detail")
+        ft.commit()
     }
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         var switchTo : Fragment? = null
