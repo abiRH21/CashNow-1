@@ -5,20 +5,19 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 
-class MyOffersListFragment : Fragment() {
-   private var offerList : ArrayList<Offer>? = null
-    private var listener: OnOfferSelectedListener? = null
-    lateinit var adapter : MyOffersListAdapter
+class AcceptedOffersListFragment : Fragment() {
+    private var offerList : ArrayList<Offer>? = null
+    private var listener: OnOfferSelectedListenerAccepted? = null
+    lateinit var adapter : AcceptedOffersListAdapter
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?
     ): View? {
         val recyclerView = inflater.inflate(R.layout.fragment_offers_list, container, false) as RecyclerView
-        adapter = MyOffersListAdapter(context, listener)
+        adapter = AcceptedOffersListAdapter(context, listener)
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.setHasFixedSize(true)
@@ -30,7 +29,7 @@ class MyOffersListFragment : Fragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        if (context is OnOfferSelectedListener) {
+        if (context is  OnOfferSelectedListenerAccepted) {
             listener = context
         } else {
             throw RuntimeException(context.toString() + " must implement OnDocSelectedListener")
@@ -41,9 +40,8 @@ class MyOffersListFragment : Fragment() {
         listener = null
     }
 
-    interface OnOfferSelectedListener {
+    interface OnOfferSelectedListenerAccepted {
         fun onOfferSelected (offer : Offer)
     }
-
 
 }
