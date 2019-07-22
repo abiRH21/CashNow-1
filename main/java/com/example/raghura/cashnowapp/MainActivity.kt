@@ -11,7 +11,7 @@ import android.widget.Toast
 
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity(), MyOffersListFragment.OnOfferSelectedListener  , AcceptedOffersListFragment.OnOfferSelectedListenerAccepted {
+class MainActivity : AppCompatActivity(), MyOffersListFragment.OnOfferSelectedListener  , AcceptedOffersListFragment.OnOfferSelectedListenerAccepted , AvailableOffersListFragment.OnOfferSelectedListener {
     override fun onOfferSelected(offer: Offer) {
        Toast.makeText(this, offer.toString(), Toast.LENGTH_LONG).show()
     }
@@ -32,7 +32,15 @@ class MainActivity : AppCompatActivity(), MyOffersListFragment.OnOfferSelectedLi
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_available_offers -> {
-               // message.setText(R.string.title_dashboard)
+                switchTo = AvailableOffersListFragment()
+                if  ( switchTo != null) {
+                    val ft = supportFragmentManager.beginTransaction()
+                    ft.replace(R.id.fragment_container, switchTo)
+                    while (supportFragmentManager.backStackEntryCount > 0) {
+                        supportFragmentManager.popBackStackImmediate()
+                    }
+                    ft.commit()
+                }
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_accepted_offers -> {
