@@ -3,17 +3,32 @@ package com.example.raghura.cashnowapp
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.design.widget.Snackbar
+import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
 
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), MyOffersListFragment.OnOfferSelectedListener  {
+    override fun onOfferSelected(offer: Offer) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
+        var switchTo : Fragment? = null
         when (item.itemId) {
             R.id.navigation_my_offers -> {
-               // message.setText(R.string.title_home)
+                Toast.makeText(this,"Changed", Toast.LENGTH_LONG).show()
+               switchTo = MyOffersListFragment()
+                if  ( switchTo != null) {
+                    val ft = supportFragmentManager.beginTransaction()
+                    ft.replace(R.id.fragment_container, switchTo)
+                    while (supportFragmentManager.backStackEntryCount > 0) {
+                        supportFragmentManager.popBackStackImmediate()
+                    }
+                    ft.commit()
+                }
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_available_offers -> {
@@ -35,11 +50,11 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
-
-        fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show()
-        }
+//
+//        fab.setOnClickListener { view ->
+//            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+//                    .setAction("Action", null).show()
+//        }
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
     }
 
