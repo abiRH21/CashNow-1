@@ -61,9 +61,20 @@ class MainActivity : AppCompatActivity(),SplashFragment.OnLoginButtonPressedList
 //                    }
 //                    ft.commitAllowingStateLoss()
 //                }
-                val ft = supportFragmentManager.beginTransaction()
+            //    val ft = supportFragmentManager.beginTransaction()
               //  ft.replace(R.id.fragment_container, PicFragment.newInstance(user.uid , false ))
-                ft.commitAllowingStateLoss()
+                var switchTo : Fragment? = null
+
+                switchTo = AvailableOffersListFragment()
+                if  ( switchTo != null) {
+                    val ft = supportFragmentManager.beginTransaction()
+                    ft.replace(R.id.fragment_container, switchTo)
+                    while (supportFragmentManager.backStackEntryCount > 0) {
+                        supportFragmentManager.popBackStackImmediate()
+                    }
+                    ft.commitAllowingStateLoss()
+                }
+              //  ft.commitAllowingStateLoss()
             } else {
                 switchToSplashFragment()
             }
@@ -189,17 +200,7 @@ class MainActivity : AppCompatActivity(),SplashFragment.OnLoginButtonPressedList
 //                    .setAction("Action", null).show()
 //        }
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
-        var switchTo : Fragment? = null
 
-        switchTo = AvailableOffersListFragment()
-        if  ( switchTo != null) {
-            val ft = supportFragmentManager.beginTransaction()
-            ft.replace(R.id.fragment_container, switchTo)
-            while (supportFragmentManager.backStackEntryCount > 0) {
-                supportFragmentManager.popBackStackImmediate()
-            }
-            ft.commit()
-        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
