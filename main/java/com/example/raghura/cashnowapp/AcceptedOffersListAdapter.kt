@@ -10,8 +10,8 @@ class AcceptedOffersListAdapter (var context: Context?, var listener: AcceptedOf
     var offers : ArrayList<Offer>
     init {
         offers = ArrayList<Offer>()
-        offers.add(Offer("10230","200","by Adam "))
-        offers.add(Offer("50012","400","by John"))
+        offers.add(Offer("80 Russian Roubles","0.2","by Adam "))
+        offers.add(Offer("92 U.A.E Dirhams","0.4","by John"))
 
 
         Log.d("OOO", offers.toString())

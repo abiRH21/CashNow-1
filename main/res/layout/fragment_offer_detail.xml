@@ -8,12 +8,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="24sp"
+        android:gravity="center"
+        android:textStyle="bold"
         android:layout_centerHorizontal="true"/>
     <TextView
         android:id="@+id/detail_name_text_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="24sp"
+        android:gravity="center"
         android:layout_below="@+id/detail_amount_text_view"
         android:layout_centerHorizontal="true"/>
     <TextView
@@ -21,6 +24,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="24sp"
+        android:gravity="center"
         android:layout_below="@+id/detail_name_text_view"
         android:layout_centerHorizontal="true"/>
     <TextView
@@ -28,6 +32,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="24sp"
+        android:gravity="center"
+        android:textStyle="bold"
         android:layout_below="@+id/detail_distance_text_view"
         android:layout_centerHorizontal="true"/>
+    <Button
+        android:id="@+id/detail_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Accept Offer"
+        android:layout_centerHorizontal="true"
+        android:textSize="24sp"
+        android:layout_below="@+id/detail_location_text_view"/>
 </RelativeLayout>

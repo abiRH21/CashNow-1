@@ -12,10 +12,15 @@ import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), MyOffersListFragment.OnOfferSelectedListener  , AcceptedOffersListFragment.OnOfferSelectedListenerAccepted , AvailableOffersListFragment.OnOfferSelectedListener {
+    var Fbool : Boolean = false
     override fun onOfferSelected(offer: Offer) {
 
-       Toast.makeText(this, offer.toString(), Toast.LENGTH_LONG).show()
-        val offerFragment = OfferDetailFragment.newInstance(offer)
+       //Toast.makeText(this, offer.toString(), Toast.LENGTH_LONG).show()
+        var offerFragment: OfferDetailFragment? = null
+        offerFragment = OfferDetailFragment.newInstance(offer,0)
+        if (Fbool == true) {
+            offerFragment = OfferDetailFragment.newInstance(offer,1)
+        }
         val ft = supportFragmentManager.beginTransaction()
         ft.replace(R.id.fragment_container, offerFragment)
         ft.addToBackStack("detail")
@@ -25,8 +30,9 @@ class MainActivity : AppCompatActivity(), MyOffersListFragment.OnOfferSelectedLi
         var switchTo : Fragment? = null
         when (item.itemId) {
             R.id.navigation_my_offers -> {
-                toolbar.title = "My Offers"
-                Toast.makeText(this,"Changed", Toast.LENGTH_LONG).show()
+                Fbool = false
+                toolbar.title = "My Posted Offers History"
+               // Toast.makeText(this,"Changed", Toast.LENGTH_LONG).show()
                switchTo = MyOffersListFragment()
                 if  ( switchTo != null) {
                     val ft = supportFragmentManager.beginTransaction()
@@ -39,7 +45,8 @@ class MainActivity : AppCompatActivity(), MyOffersListFragment.OnOfferSelectedLi
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_available_offers -> {
-                toolbar.title = "Available Offers"
+                Fbool = false
+                toolbar.title = "All Available Offers"
                 switchTo = AvailableOffersListFragment()
                 if  ( switchTo != null) {
                     val ft = supportFragmentManager.beginTransaction()
@@ -52,7 +59,8 @@ class MainActivity : AppCompatActivity(), MyOffersListFragment.OnOfferSelectedLi
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_accepted_offers -> {
-                toolbar.title = "Accepted Offers"
+                Fbool = true
+                toolbar.title = "My Accepted Offers"
                 switchTo = AcceptedOffersListFragment()
                 if  ( switchTo != null) {
                     val ft = supportFragmentManager.beginTransaction()
@@ -65,6 +73,7 @@ class MainActivity : AppCompatActivity(), MyOffersListFragment.OnOfferSelectedLi
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_new_offers -> {
+                Fbool = false
                 toolbar.title = "New Offer"
                 switchTo = NewOfferFragment()
                 if  ( switchTo != null) {

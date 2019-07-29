@@ -11,8 +11,8 @@ class MyOffersListAdapter (var context: Context?, var listener: MyOffersListFrag
      var offers : ArrayList<Offer>
     init {
         offers = ArrayList<Offer>()
-        offers.add(Offer("100","200","by Adam "))
-        offers.add(Offer("500","400","by John"))
+        offers.add(Offer("100","0.3","by Adam "))
+        offers.add(Offer("500","0.4","by John"))
 
 
         Log.d("OOO", offers.toString())

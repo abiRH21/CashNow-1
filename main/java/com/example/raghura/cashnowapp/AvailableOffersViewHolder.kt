@@ -18,8 +18,8 @@ class AvailableOffersViewHolder (itemView: View, adapter: AvailableOffersListAda
     }
 
     fun bind(offer: Offer) {
-        amountTextView.text = "${offer.amount} U.S Dollars"
-        distanceTextView.text = "${offer.distance} miles"
+        amountTextView.text = "${offer.amount}"
+        distanceTextView.text = "           Distance: ${offer.distance} miles"
         nameTextView.text = "${offer.name}"
         timeTextView.text = "Posted 25 mins ago"
 

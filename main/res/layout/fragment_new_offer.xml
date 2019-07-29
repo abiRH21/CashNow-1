@@ -3,20 +3,47 @@
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="match_parent">
 <EditText
-    android:id="@+id/new_offer_currency"
+    android:id="@+id/new_offer_currency_desired"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_centerHorizontal="true"
-    android:hint="Currency"
+    android:hint="Desired Currency"
     android:textSize="30sp"
     />
     <EditText
-        android:id="@+id/new_offer_amount"
+        android:id="@+id/new_offer_amount_desired"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/new_offer_currency"
+        android:layout_below="@+id/new_offer_currency_desired"
         android:layout_centerHorizontal="true"
-        android:hint="Amount "
+        android:hint="Desired Amount "
+        android:textSize="30sp"
+        />
+    <EditText
+        android:id="@+id/new_offer_currency"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/new_offer_amount_desired"
+        android:layout_centerHorizontal="true"
+        android:hint="In exchange for  Amount "
+        android:textSize="30sp"
+        />
+    <EditText
+    android:id="@+id/new_offer_amount"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/new_offer_currency"
+    android:layout_centerHorizontal="true"
+    android:hint="In exchange for Amount "
+    android:textSize="30sp"
+    />
+    <EditText
+        android:id="@+id/new_offer_meetup_location"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/new_offer_amount"
+        android:layout_centerHorizontal="true"
+        android:hint="Meet Up Location"
         android:textSize="30sp"
         />
     <Button
@@ -24,7 +51,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_below="@+id/new_offer_amount"
+        android:layout_below="@+id/new_offer_meetup_location"
         android:textSize="30sp"
         android:text="Ok"/>
 </RelativeLayout>

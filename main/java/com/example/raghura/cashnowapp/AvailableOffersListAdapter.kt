@@ -10,8 +10,8 @@ class AvailableOffersListAdapter (var context: Context?, var listener: Available
     var offers : ArrayList<Offer>
     init {
         offers = ArrayList<Offer>()
-        offers.add(Offer("100","200","by Available Adam "))
-        offers.add(Offer("500","400","by Availabe John"))
+        offers.add(Offer("1000 Japanese Yen","0.6","by Samuel"))
+        offers.add(Offer("2000 Indian Rupees","0.2","by Eric"))
 
 
         Log.d("OOO", offers.toString())
