@@ -23,4 +23,11 @@
     <string name="logout">Logout</string>
     <string name="login">Login</string>
     <string name="icon">Icon</string>
+    <string-array name="currencies">
+        <item>U.S Dollars</item>
+        <item>Indian Rupees</item>
+        <item>U.A.E Dirhams</item>
+        <item>Russian Roubles</item>
+        <item>Qatari Riyals</item>
+    </string-array>
 </resources>
