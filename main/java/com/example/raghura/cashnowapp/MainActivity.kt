@@ -63,18 +63,23 @@ class MainActivity : AppCompatActivity(),SplashFragment.OnLoginButtonPressedList
 //                }
             //    val ft = supportFragmentManager.beginTransaction()
               //  ft.replace(R.id.fragment_container, PicFragment.newInstance(user.uid , false ))
-                var switchTo : Fragment? = null
+//                var switchTo : Fragment? = null
+//
+//                switchTo = AvailableOffersListFragment()
+//                if  ( switchTo != null) {
+//                    val ft = supportFragmentManager.beginTransaction()
+//                    ft.replace(R.id.fragment_container, switchTo)
+//                    while (supportFragmentManager.backStackEntryCount > 0) {
+//                        supportFragmentManager.popBackStackImmediate()
+//                    }
+//                    ft.commitAllowingStateLoss()
+//                }
+//              //  ft.commitAllowingStateLoss()
 
-                switchTo = AvailableOffersListFragment()
-                if  ( switchTo != null) {
-                    val ft = supportFragmentManager.beginTransaction()
-                    ft.replace(R.id.fragment_container, switchTo)
-                    while (supportFragmentManager.backStackEntryCount > 0) {
-                        supportFragmentManager.popBackStackImmediate()
-                    }
-                    ft.commitAllowingStateLoss()
-                }
-              //  ft.commitAllowingStateLoss()
+                val ft = supportFragmentManager.beginTransaction()
+                ft.replace(R.id.fragment_container, AvailableOffersListFragment.newInstance(user.uid , false ))
+                ft.commitAllowingStateLoss()
+
             } else {
                 switchToSplashFragment()
             }
