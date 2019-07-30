@@ -159,15 +159,9 @@ class MainActivity : AppCompatActivity(),SplashFragment.OnLoginButtonPressedList
             R.id.navigation_accepted_offers -> {
                 Fbool = true
                 toolbar.title = "My Accepted Offers"
-                switchTo = AcceptedOffersListFragment()
-                if  ( switchTo != null) {
-                    val ft = supportFragmentManager.beginTransaction()
-                    ft.replace(R.id.fragment_container, switchTo)
-                    while (supportFragmentManager.backStackEntryCount > 0) {
-                        supportFragmentManager.popBackStackImmediate()
-                    }
-                    ft.commit()
-                }
+                val ft = supportFragmentManager.beginTransaction()
+                ft.replace(R.id.fragment_container, AcceptedOffersListFragment.newInstance(Guser.uid , false ))
+                ft.commitAllowingStateLoss()
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_new_offers -> {
