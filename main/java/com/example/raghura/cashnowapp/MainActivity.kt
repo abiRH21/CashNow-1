@@ -137,15 +137,9 @@ class MainActivity : AppCompatActivity(),SplashFragment.OnLoginButtonPressedList
                 Fbool = false
                 toolbar.title = "My Posted Offers History"
                // Toast.makeText(this,"Changed", Toast.LENGTH_LONG).show()
-               switchTo = MyOffersListFragment()
-                if  ( switchTo != null) {
-                    val ft = supportFragmentManager.beginTransaction()
-                    ft.replace(R.id.fragment_container, switchTo)
-                    while (supportFragmentManager.backStackEntryCount > 0) {
-                        supportFragmentManager.popBackStackImmediate()
-                    }
-                    ft.commit()
-                }
+                val ft = supportFragmentManager.beginTransaction()
+                ft.replace(R.id.fragment_container, MyOffersListFragment.newInstance(Guser.uid , false ))
+                ft.commitAllowingStateLoss()
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_available_offers -> {
