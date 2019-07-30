@@ -51,21 +51,21 @@ class NewOfferFragment : Fragment() , AdapterView.OnItemSelectedListener{
         val spinner = new_offer_currency_desired_spinner
         spinner.adapter = ArrayAdapter(activity, R.layout.support_simple_spinner_dropdown_item, resources.getStringArray(R.array.currencies)) as SpinnerAdapter?
 /*set click listener*/
-        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
-                val num = when (spinner.selectedItem.toString()) {
-//                    "H" -> editText.setText("1")
-//                    "He" -> editText.setText("4")
-//                    "C" -> editText.setText("12")
-//                    "O" -> editText.setText("16")
-//                    else -> editText.setText("")
-                }
-            }
-
-            override fun onNothingSelected(parent: AdapterView<*>) {
-                /*Do something if nothing selected*/
-            }
-        }
+//        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+//            override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
+//                val num = when (spinner.selectedItem.toString()) {
+////                    "H" -> editText.setText("1")
+////                    "He" -> editText.setText("4")
+////                    "C" -> editText.setText("12")
+////                    "O" -> editText.setText("16")
+////                    else -> editText.setText("")
+//                }
+//            }
+//
+//            override fun onNothingSelected(parent: AdapterView<*>) {
+//                /*Do something if nothing selected*/
+//            }
+//        }
 
     }
 }

@@ -8,8 +8,9 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
+private const val ARG_UID = "UID"
 class AvailableOffersListFragment : Fragment() {
+    private var uid: String? = null
     private var offerList : ArrayList<Offer>? = null
     private var listener: OnOfferSelectedListener? = null
     lateinit var adapter : AvailableOffersListAdapter
@@ -25,6 +26,14 @@ class AvailableOffersListFragment : Fragment() {
         return recyclerView
 
 
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        arguments?.let {
+            uid = it.getString(ARG_UID)
+
+        }
     }
 
     override fun onAttach(context: Context) {
@@ -43,6 +52,15 @@ class AvailableOffersListFragment : Fragment() {
     interface OnOfferSelectedListener {
         fun onOfferSelected (offer : Offer)
     }
+    companion object {
+        @JvmStatic
+        fun newInstance(uid: String , filter : Boolean) =
+                AvailableOffersListFragment().apply {
+                    arguments = Bundle().apply {
+                        putString(ARG_UID, uid)
 
+                    }
+                }
+    }
 
 }
