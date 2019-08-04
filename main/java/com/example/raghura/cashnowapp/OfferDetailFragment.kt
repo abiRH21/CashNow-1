@@ -11,6 +11,7 @@ import com.google.firebase.firestore.*
 import kotlinx.android.synthetic.main.fragment_offer_detail.view.*
 
 private const val ARG_DOC = "OFFER"
+private const val ARG_UID = "UID"
 private const val ARG_TYPE = "TYPE"
 
 class OfferDetailFragment : Fragment() {
@@ -19,6 +20,7 @@ class OfferDetailFragment : Fragment() {
             .collection("offers")
     private var offer: Offer? = null
     private var type: Int? = 0
+    private var uid: String?= ""
     val offers = ArrayList<Offer>()
     init {
         quoteRef
@@ -62,11 +64,13 @@ class OfferDetailFragment : Fragment() {
     companion object {
 
         @JvmStatic
-        fun newInstance(offer: Offer, type: Int) =
+        fun newInstance(offer: Offer, type: Int, uid : String) =
                 OfferDetailFragment().apply {
                     arguments = Bundle().apply {
                         putParcelable(ARG_DOC, offer)
                         putInt(ARG_TYPE, type)
+                        putString(ARG_UID ,uid)
+
                     }
                 }
     }
@@ -75,6 +79,7 @@ class OfferDetailFragment : Fragment() {
         arguments?.let {
             offer = it.getParcelable(ARG_DOC)
             type = it.getInt(ARG_TYPE)
+            uid = it.getString(ARG_UID)
 
         }
 
@@ -102,11 +107,12 @@ class OfferDetailFragment : Fragment() {
 
                     var pos : String =""
                     for (offer in offers) {
-                        if (offer.creatorUID == "JaIXn20VXSUbChanWcnRAs00wVN2")
+                        if (offer.creatorUID == offer.creatorUID)
                         pos = offer.id
                     }
-                    quoteRef.document(pos).set(Offer("100","0.2","Bob","JaIXn20VXSUbChanWcnRAs00wVN2","Uid4")).addOnSuccessListener {
-                        Log.d("CCC",offers.toString())
+                    val newOffer: Offer = Offer(offer!!.amount,offer!!.distance,offer!!.name,offer!!.creatorUID, uid!!)
+                    quoteRef.document(pos).set(newOffer).addOnSuccessListener {
+                        Log.d("CCC", offers.toString())
                     }
 
         }

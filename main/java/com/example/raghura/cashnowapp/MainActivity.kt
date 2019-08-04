@@ -121,9 +121,9 @@ class MainActivity : AppCompatActivity(),SplashFragment.OnLoginButtonPressedList
 
        //Toast.makeText(this, offer.toString(), Toast.LENGTH_LONG).show()
         var offerFragment: OfferDetailFragment? = null
-        offerFragment = OfferDetailFragment.newInstance(offer,0)
+        offerFragment = OfferDetailFragment.newInstance(offer,0, Guser.uid)
         if (Fbool == true) {
-            offerFragment = OfferDetailFragment.newInstance(offer,1)
+            offerFragment = OfferDetailFragment.newInstance(offer,1,Guser.uid)
         }
         val ft = supportFragmentManager.beginTransaction()
         ft.replace(R.id.fragment_container, offerFragment)
