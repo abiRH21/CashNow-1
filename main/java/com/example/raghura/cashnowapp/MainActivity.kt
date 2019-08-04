@@ -116,6 +116,17 @@ class MainActivity : AppCompatActivity(),SplashFragment.OnLoginButtonPressedList
 
     }
 
+    override fun onOfferSelectedAvailableOffers(offer: Offer) {
+        var offerFragment: OfferDetailFragment? = null
+        offerFragment = OfferDetailFragment.newInstance(offer,0, Guser.uid)
+        if (Fbool == true) {
+            offerFragment = OfferDetailFragment.newInstance(offer,1,Guser.uid)
+        }
+        val ft = supportFragmentManager.beginTransaction()
+        ft.replace(R.id.fragment_container, offerFragment)
+        ft.addToBackStack("detail")
+        ft.commit()
+    }
 
     override fun onOfferSelected(offer: Offer) {
 

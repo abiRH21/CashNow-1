@@ -67,7 +67,7 @@ class AvailableOffersListFragment : Fragment() {
     }
 
     interface OnOfferSelectedListener {
-        fun onOfferSelected (offer : Offer)
+        fun onOfferSelectedAvailableOffers (offer : Offer)
     }
     companion object {
         @JvmStatic

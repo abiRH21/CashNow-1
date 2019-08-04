@@ -76,7 +76,7 @@ class AvailableOffersListAdapter (var context: Context?, var listener: Available
 
         val offer = offers!![adapterPosition]
         //Toast.makeText(context, "Selected ${pic.caption}", Toast.LENGTH_LONG).show()
-        listener?.onOfferSelected(offer)
+        listener?.onOfferSelectedAvailableOffers(offer)
 
     }
     fun add (offer: Offer) {

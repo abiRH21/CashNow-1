@@ -13,7 +13,8 @@ data class Offer (
         val distance: String = "",
         val name: String = "",
         val creatorUID: String = "",
-        val receiverUID:String =""
+        val receiverUID:String ="",
+        val accepted: String = ""
 ) : Parcelable
 {
     @get:Exclude

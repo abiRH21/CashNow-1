@@ -110,7 +110,7 @@ class OfferDetailFragment : Fragment() {
                         if (offer.creatorUID == offer.creatorUID)
                         pos = offer.id
                     }
-                    val newOffer: Offer = Offer(offer!!.amount,offer!!.distance,offer!!.name,offer!!.creatorUID, uid!!)
+                    val newOffer: Offer = Offer(offer!!.amount,offer!!.distance,offer!!.name,offer!!.creatorUID, uid!!,"T")
                     quoteRef.document(pos).set(newOffer).addOnSuccessListener {
                         Log.d("CCC", offers.toString())
                     }
