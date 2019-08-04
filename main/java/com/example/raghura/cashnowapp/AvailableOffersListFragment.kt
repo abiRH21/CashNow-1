@@ -9,12 +9,16 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.firebase.ui.auth.data.model.User
+import com.google.firebase.auth.FirebaseUser
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_offer_detail.*
 import kotlinx.android.synthetic.main.fragment_offer_detail.view.*
 
 private const val ARG_UID = "UID"
+private const val ARG_USER = "USER"
 class AvailableOffersListFragment : Fragment() {
+    private var user: FirebaseUser? = null
     private var uid: String? = null
     private var offerList : ArrayList<Offer>? = null
     private var listener: OnOfferSelectedListener? = null
@@ -31,7 +35,8 @@ class AvailableOffersListFragment : Fragment() {
 
 
 
-            adapter.add(Offer ("100","0.2","Bob",uid!!))
+            adapter.add(Offer ("100","0.2", user!!.displayName!!,uid!!))
+            Log.d("XXX", "${user!!.displayName}" )
 
         }
 
@@ -49,8 +54,9 @@ class AvailableOffersListFragment : Fragment() {
         super.onCreate(savedInstanceState)
         arguments?.let {
             uid = it.getString(ARG_UID)
-
+            user = it.getParcelable(ARG_USER)
         }
+
     }
 
     override fun onAttach(context: Context) {
@@ -71,10 +77,11 @@ class AvailableOffersListFragment : Fragment() {
     }
     companion object {
         @JvmStatic
-        fun newInstance(uid: String , filter : Boolean) =
+        fun newInstance(uid: String , filter : Boolean, user: FirebaseUser) =
                 AvailableOffersListFragment().apply {
                     arguments = Bundle().apply {
                         putString(ARG_UID, uid)
+                        putParcelable(ARG_USER, user)
 
                     }
                 }

@@ -106,11 +106,11 @@ class OfferDetailFragment : Fragment() {
                  //   quoteRef.document(offers[position].id).set(offers[position])
 
                     var pos : String =""
-                    for (offer in offers) {
-                        if (offer.creatorUID == offer.creatorUID)
-                        pos = offer.id
+                    for (o in offers) {
+                        if (o.creatorUID == offer!!.creatorUID)
+                        pos = o.id
                     }
-                    val newOffer: Offer = Offer(offer!!.amount,offer!!.distance,offer!!.name,offer!!.creatorUID, uid!!,"T")
+                    val newOffer: Offer = Offer(offer!!.amount,offer!!.distance,offer!!.name,pos, uid!!,"T")
                     quoteRef.document(pos).set(newOffer).addOnSuccessListener {
                         Log.d("CCC", offers.toString())
                     }

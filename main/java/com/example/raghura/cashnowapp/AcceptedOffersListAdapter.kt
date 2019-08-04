@@ -18,9 +18,9 @@ class AcceptedOffersListAdapter (var context: Context?, var listener: AcceptedOf
     init {
         var checkSize : Boolean = false
         quoteRef
-                .orderBy(Offer.LAST_TOUCHED_KEY, Query.Direction.ASCENDING).whereEqualTo("creatorUID",uid).whereEqualTo("accepted","T")
+                .orderBy(Offer.LAST_TOUCHED_KEY, Query.Direction.ASCENDING).whereEqualTo("accepted","T").whereEqualTo("receiverUID",uid)
 
-                quoteRef.addSnapshotListener { snapshot: QuerySnapshot?, exception: FirebaseFirestoreException? ->
+                .addSnapshotListener { snapshot: QuerySnapshot?, exception: FirebaseFirestoreException? ->
                     if (exception != null) {
                         //Log.e(Constants.TAG, "Listen error: $exception")
                         return@addSnapshotListener
@@ -64,9 +64,9 @@ class AcceptedOffersListAdapter (var context: Context?, var listener: AcceptedOf
                         .collection("offers")
 
                 quoteRef
-                        .orderBy(Offer.LAST_TOUCHED_KEY, Query.Direction.ASCENDING).whereEqualTo("receiverUID",uid).whereEqualTo("accepted","T")
+                        .orderBy(Offer.LAST_TOUCHED_KEY, Query.Direction.ASCENDING).whereEqualTo("accepted","T").whereEqualTo("creatorUID",uid)
 
-                quoteRef.addSnapshotListener { snapshot: QuerySnapshot?, exception: FirebaseFirestoreException? ->
+                .addSnapshotListener { snapshot: QuerySnapshot?, exception: FirebaseFirestoreException? ->
                     if (exception != null) {
                         //Log.e(Constants.TAG, "Listen error: $exception")
                         return@addSnapshotListener

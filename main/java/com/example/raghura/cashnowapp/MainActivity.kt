@@ -77,7 +77,7 @@ class MainActivity : AppCompatActivity(),SplashFragment.OnLoginButtonPressedList
 //              //  ft.commitAllowingStateLoss()
 
                 val ft = supportFragmentManager.beginTransaction()
-                ft.replace(R.id.fragment_container, AvailableOffersListFragment.newInstance(user.uid , false ))
+                ft.replace(R.id.fragment_container, AvailableOffersListFragment.newInstance(user.uid , false , Guser))
                 ft.commitAllowingStateLoss()
 
             } else {
@@ -156,15 +156,9 @@ class MainActivity : AppCompatActivity(),SplashFragment.OnLoginButtonPressedList
             R.id.navigation_available_offers -> {
                 Fbool = false
                 toolbar.title = "All Available Offers"
-                switchTo = AvailableOffersListFragment()
-                if  ( switchTo != null) {
-                    val ft = supportFragmentManager.beginTransaction()
-                    ft.replace(R.id.fragment_container, switchTo)
-                    while (supportFragmentManager.backStackEntryCount > 0) {
-                        supportFragmentManager.popBackStackImmediate()
-                    }
-                    ft.commit()
-                }
+                val ft = supportFragmentManager.beginTransaction()
+                ft.replace(R.id.fragment_container, AvailableOffersListFragment.newInstance(Guser.uid , false , Guser ))
+                ft.commitAllowingStateLoss()
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_accepted_offers -> {
@@ -219,18 +213,19 @@ class MainActivity : AppCompatActivity(),SplashFragment.OnLoginButtonPressedList
         // as you specify a parent activity in AndroidManifest.xml.
         return when (item.itemId) {
             R.id.action_settings ->{
-                toolbar.title ="Settings"
-                var switchTo : Fragment? = null
-
-                switchTo = SettingsFragment()
-                if  ( switchTo != null) {
-                    val ft = supportFragmentManager.beginTransaction()
-                    ft.replace(R.id.fragment_container, switchTo)
-                    while (supportFragmentManager.backStackEntryCount > 0) {
-                        supportFragmentManager.popBackStackImmediate()
-                    }
-                    ft.commit()
-                }
+//                toolbar.title ="Settings"
+//                var switchTo : Fragment? = null
+//
+//                switchTo = SettingsFragment()
+//                if  ( switchTo != null) {
+//                    val ft = supportFragmentManager.beginTransaction()
+//                    ft.replace(R.id.fragment_container, switchTo)
+//                    while (supportFragmentManager.backStackEntryCount > 0) {
+//                        supportFragmentManager.popBackStackImmediate()
+//                    }
+//                    ft.commit()
+//                }
+                auth.signOut()
                 true}
 
             else -> super.onOptionsItemSelected(item)
