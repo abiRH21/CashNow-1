@@ -19,7 +19,7 @@ class MyOffersListFragment : Fragment() {
                               savedInstanceState: Bundle?
     ): View? {
         val recyclerView = inflater.inflate(R.layout.fragment_offers_list, container, false) as RecyclerView
-        adapter = MyOffersListAdapter(context, listener)
+        adapter = MyOffersListAdapter(context, listener , uid!!)
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.setHasFixedSize(true)
