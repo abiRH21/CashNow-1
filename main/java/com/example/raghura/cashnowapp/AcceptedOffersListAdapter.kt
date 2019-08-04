@@ -17,8 +17,9 @@ class AcceptedOffersListAdapter (var context: Context?, var listener: AcceptedOf
     lateinit var thisContext : Context
     init {
         var checkSize : Boolean = false
+
         quoteRef
-                .orderBy(Offer.LAST_TOUCHED_KEY, Query.Direction.ASCENDING).whereEqualTo("accepted","T").whereEqualTo("receiverUID",uid)
+                .orderBy(Offer.LAST_TOUCHED_KEY, Query.Direction.ASCENDING).whereEqualTo("accepted","T").whereEqualTo("creatorUID",uid)
 
                 .addSnapshotListener { snapshot: QuerySnapshot?, exception: FirebaseFirestoreException? ->
                     if (exception != null) {
@@ -64,7 +65,7 @@ class AcceptedOffersListAdapter (var context: Context?, var listener: AcceptedOf
                         .collection("offers")
 
                 quoteRef
-                        .orderBy(Offer.LAST_TOUCHED_KEY, Query.Direction.ASCENDING).whereEqualTo("accepted","T").whereEqualTo("creatorUID",uid)
+                        .orderBy(Offer.LAST_TOUCHED_KEY, Query.Direction.ASCENDING).whereEqualTo("accepted","T").whereEqualTo("receiverUID",uid)
 
                 .addSnapshotListener { snapshot: QuerySnapshot?, exception: FirebaseFirestoreException? ->
                     if (exception != null) {

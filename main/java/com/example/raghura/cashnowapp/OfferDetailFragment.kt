@@ -104,13 +104,15 @@ class OfferDetailFragment : Fragment() {
         }
                 view.detail_button.setOnClickListener {
                  //   quoteRef.document(offers[position].id).set(offers[position])
-
+                    Log.d("TTT", "${offer!!.creatorUID}")
                     var pos : String =""
+                    var  cID : String =""
                     for (o in offers) {
-                        if (o.creatorUID == offer!!.creatorUID)
+                        if ((o.creatorUID == offer!!.creatorUID) && !o.accepted.equals("T"))
                         pos = o.id
+                        cID = o.creatorUID
                     }
-                    val newOffer: Offer = Offer(offer!!.amount,offer!!.distance,offer!!.name,pos, uid!!,"T")
+                    val newOffer: Offer = Offer(offer!!.amount,offer!!.distance,offer!!.name,offer!!.creatorUID, uid!!,"T")
                     quoteRef.document(pos).set(newOffer).addOnSuccessListener {
                         Log.d("CCC", offers.toString())
                     }
