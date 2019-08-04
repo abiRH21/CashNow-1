@@ -5,9 +5,12 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import kotlinx.android.synthetic.main.activity_main.*
+
 private const val ARG_UID = "UID"
 class AvailableOffersListFragment : Fragment() {
     private var uid: String? = null
@@ -18,11 +21,17 @@ class AvailableOffersListFragment : Fragment() {
                               savedInstanceState: Bundle?
     ): View? {
         val recyclerView = inflater.inflate(R.layout.fragment_offers_list, container, false) as RecyclerView
-        adapter = AvailableOffersListAdapter(context, listener)
+        adapter = AvailableOffersListAdapter(context, listener, "")
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.setHasFixedSize(true)
+        (activity as MainActivity).fab.setOnClickListener{
 
+           Log.d("DDD","detected press")
+
+            adapter.add(Offer ("100","0.2","Bob",uid!!))
+
+        }
         return recyclerView
 
 
