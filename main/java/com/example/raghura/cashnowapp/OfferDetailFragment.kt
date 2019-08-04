@@ -3,17 +3,62 @@ package com.example.raghura.cashnowapp
 import android.opengl.Visibility
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.google.firebase.firestore.*
 import kotlinx.android.synthetic.main.fragment_offer_detail.view.*
 
 private const val ARG_DOC = "OFFER"
 private const val ARG_TYPE = "TYPE"
 
 class OfferDetailFragment : Fragment() {
+    private val quoteRef = FirebaseFirestore
+            .getInstance()
+            .collection("offers")
     private var offer: Offer? = null
     private var type: Int? = 0
+    val offers = ArrayList<Offer>()
+    init {
+        quoteRef
+                .orderBy(Offer.LAST_TOUCHED_KEY, Query.Direction.ASCENDING)//.whereEqualTo("uid",Cuid)
+
+                .addSnapshotListener { snapshot: QuerySnapshot?, exception: FirebaseFirestoreException? ->
+                    if (exception != null) {
+                        //Log.e(Constants.TAG, "Listen error: $exception")
+                        return@addSnapshotListener
+                    }
+                    for (docChange in snapshot!!.documentChanges) {
+                        val offer = Offer.fromSnapshot(docChange.document)
+                        when (docChange.type) {
+                            DocumentChange.Type.ADDED -> {
+
+                                offers.add(0, offer)
+
+                            }
+                            DocumentChange.Type.REMOVED -> {
+                                val pos = offers.indexOfFirst { offer.id == it.id }
+                                offers.removeAt(pos)
+                               // notifyItemRemoved(pos)
+//                                for ((pos,mq) in movieQuotes.withIndex()) {
+//                                if (mq.id == movieQuote.id) {
+//                                    movieQuotes.removeAt(pos)
+//                                    notifyItemRemoved(pos)
+//                                    break
+//                                }
+//                                }
+                            }
+                            DocumentChange.Type.MODIFIED -> {
+                                val pos = offers.indexOfFirst { offer.id == it.id }
+                                offers[pos] = offer
+                               // notifyItemChanged(pos)
+                            }
+                        }
+                    }
+
+                }
+    }
     companion object {
 
         @JvmStatic
@@ -51,6 +96,19 @@ class OfferDetailFragment : Fragment() {
         if (type == 1) {
             view.detail_button.visibility = View.INVISIBLE
             view.detail_location_text_view.text = "Meet up Location: Gate 21, Terminal 3, Dubai  \n ${offer?.name} phone number : +1 999-999-9999"
+        }
+                view.detail_button.setOnClickListener {
+                 //   quoteRef.document(offers[position].id).set(offers[position])
+
+                    var pos : String =""
+                    for (offer in offers) {
+                        if (offer.creatorUID == "JaIXn20VXSUbChanWcnRAs00wVN2")
+                        pos = offer.id
+                    }
+                    quoteRef.document(pos).set(Offer("100","0.2","Bob","JaIXn20VXSUbChanWcnRAs00wVN2","Uid4")).addOnSuccessListener {
+                        Log.d("CCC",offers.toString())
+                    }
+
         }
         return view
     }

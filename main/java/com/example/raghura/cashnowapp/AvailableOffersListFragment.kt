@@ -10,6 +10,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.fragment_offer_detail.*
+import kotlinx.android.synthetic.main.fragment_offer_detail.view.*
 
 private const val ARG_UID = "UID"
 class AvailableOffersListFragment : Fragment() {
@@ -27,13 +29,19 @@ class AvailableOffersListFragment : Fragment() {
         recyclerView.setHasFixedSize(true)
         (activity as MainActivity).fab.setOnClickListener{
 
-           Log.d("DDD","detected press")
+
 
             adapter.add(Offer ("100","0.2","Bob",uid!!))
 
         }
+
         return recyclerView
 
+
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
     }
 
