@@ -4,17 +4,23 @@ import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
+import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.ArrayAdapter
+import android.widget.SpinnerAdapter
 import android.widget.Toast
 import com.firebase.ui.auth.AuthUI
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.dialog_add.view.*
+import kotlinx.android.synthetic.main.dialog_filter.view.*
 
 class MainActivity : AppCompatActivity(),SplashFragment.OnLoginButtonPressedListener, MyOffersListFragment.OnOfferSelectedListener  , AcceptedOffersListFragment.OnOfferSelectedListenerAccepted , AvailableOffersListFragment.OnOfferSelectedListener {
     var Fbool : Boolean = false
@@ -177,7 +183,7 @@ class MainActivity : AppCompatActivity(),SplashFragment.OnLoginButtonPressedList
                 fab.hide()
                 Fbool = false
                 toolbar.title = "New Offer"
-                switchTo = NewOfferFragment()
+                switchTo = SettingsFragment()
                 if  ( switchTo != null) {
                     val ft = supportFragmentManager.beginTransaction()
                     ft.replace(R.id.fragment_container, switchTo)
@@ -212,6 +218,21 @@ class MainActivity : AppCompatActivity(),SplashFragment.OnLoginButtonPressedList
         return true
     }
 
+    fun filterDialog() {
+        val builder = AlertDialog.Builder(this)
+        val view = LayoutInflater.from(this).inflate(R.layout.dialog_filter,null,false)
+        val spinner1 = view.dialog_filter_desired_currency
+        val spinner2 = view.dialog_filter_user_currency_filter
+        spinner1.adapter = ArrayAdapter(this, R.layout.support_simple_spinner_dropdown_item, resources.getStringArray(R.array.currencies)) as SpinnerAdapter?
+        spinner2.adapter = ArrayAdapter(this, R.layout.support_simple_spinner_dropdown_item, resources.getStringArray(R.array.currencies)) as SpinnerAdapter?
+        builder.setView(view)
+        builder.setTitle("New Offer")
+        builder.setPositiveButton(android.R.string.ok) { _,_ ->
+
+        }
+        builder.setNegativeButton(android.R.string.cancel , null)
+        builder.create().show()
+    }
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
@@ -230,8 +251,13 @@ class MainActivity : AppCompatActivity(),SplashFragment.OnLoginButtonPressedList
 //                    }
 //                    ft.commit()
 //                }
-                auth.signOut()
+              //  auth.signOut()
+                filterDialog()
                 true}
+            R.id.action_logout -> {
+                auth.signOut()
+                true
+            }
 
             else -> super.onOptionsItemSelected(item)
         }
