@@ -1,6 +1,7 @@
 package com.example.raghura.cashnowapp
 
 import android.content.Context
+import android.support.v7.app.AlertDialog
 import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
@@ -79,6 +80,7 @@ class AvailableOffersListAdapter (var context: Context?, var listener: Available
         listener?.onOfferSelectedAvailableOffers(offer)
 
     }
+
     fun add (offer: Offer) {
         quoteRef.add(offer)
 //       pics!!.add(pic)

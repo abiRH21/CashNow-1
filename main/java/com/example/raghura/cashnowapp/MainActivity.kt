@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.widget.Toast
 import com.firebase.ui.auth.AuthUI
 import com.google.firebase.auth.FirebaseAuth
@@ -145,6 +146,7 @@ class MainActivity : AppCompatActivity(),SplashFragment.OnLoginButtonPressedList
         var switchTo : Fragment? = null
         when (item.itemId) {
             R.id.navigation_my_offers -> {
+                fab.hide()
                 Fbool = false
                 toolbar.title = "My Posted Offers History"
                // Toast.makeText(this,"Changed", Toast.LENGTH_LONG).show()
@@ -154,6 +156,7 @@ class MainActivity : AppCompatActivity(),SplashFragment.OnLoginButtonPressedList
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_available_offers -> {
+                fab.show()
                 Fbool = false
                 toolbar.title = "All Available Offers"
                 val ft = supportFragmentManager.beginTransaction()
@@ -162,6 +165,7 @@ class MainActivity : AppCompatActivity(),SplashFragment.OnLoginButtonPressedList
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_accepted_offers -> {
+                fab.hide()
                 Fbool = true
                 toolbar.title = "My Accepted Offers"
                 val ft = supportFragmentManager.beginTransaction()
@@ -170,6 +174,7 @@ class MainActivity : AppCompatActivity(),SplashFragment.OnLoginButtonPressedList
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_new_offers -> {
+                fab.hide()
                 Fbool = false
                 toolbar.title = "New Offer"
                 switchTo = NewOfferFragment()
