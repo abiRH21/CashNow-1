@@ -94,10 +94,10 @@ class OfferDetailFragment : Fragment() {
 //        //find way to make fab invisible
 //        (activity as MainActivity).fab.hide()
 //        view.fragment_pic_detail_caption.text = pic?.caption
-        view.detail_amount_text_view.text = "Offer is ${offer?.amount} for 25 U.S Dollars"
+        view.detail_amount_text_view.text = "Offer is ${offer?.userAmount} ${offer?.userCurrency} for ${offer?.desiredAmount} ${offer?.desiredCurrency}"
         view.detail_distance_text_view.text = "Distance: ${offer?.distance} miles"
         view.detail_location_text_view.text = "Meet up Location: Gate 21, Terminal 3, Dubai International "
-        view.detail_name_text_view.text = offer?.name
+        view.detail_name_text_view.text = "by ${offer?.name}"
         if (type == 1) {
             view.detail_button.visibility = View.INVISIBLE
             view.detail_location_text_view.text = "Meet up Location: Gate 21, Terminal 3, Dubai  \n ${offer?.name} phone number : +1 999-999-9999"
@@ -112,7 +112,7 @@ class OfferDetailFragment : Fragment() {
                         pos = o.id
                         cID = o.creatorUID
                     }
-                    val newOffer: Offer = Offer(offer!!.amount,offer!!.distance,offer!!.name,offer!!.creatorUID, uid!!,"T")
+                    val newOffer: Offer = Offer(offer!!.userAmount, offer!!.userCurrency, offer!!.desiredAmount, offer!!.desiredCurrency, offer!!.distance, offer!!.name, offer!!.creatorUID, uid!!, "T")
                     quoteRef.document(pos).set(newOffer).addOnSuccessListener {
                         Log.d("CCC", offers.toString())
                     }

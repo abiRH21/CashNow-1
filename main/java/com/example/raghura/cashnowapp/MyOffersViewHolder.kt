@@ -16,9 +16,9 @@ class MyOffersViewHolder (itemView: View, adapter: MyOffersListAdapter) : Recycl
         }
     }
     fun bind (offer: Offer) {
-        amountTextView.text = "${offer.amount} U.S Dollars"
-        distanceTextView.text = "           Distance: ${offer.distance} miles"
-        nameTextView.text = "${offer.name}"
+        amountTextView.text = "${offer.userAmount} ${offer.userCurrency} for ${offer.desiredAmount} ${offer.desiredCurrency}"
+        distanceTextView.text = "Distance: ${offer.distance} miles"
+        nameTextView.text = "by ${offer.name}"
         timeTextView.text = "Posted 25 mins ago"
 
     }

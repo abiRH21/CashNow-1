@@ -9,7 +9,10 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class Offer (
-        val amount: String = "",
+        val userAmount: String = "",
+        val userCurrency : String ="",
+        val desiredAmount: String ="",
+        val desiredCurrency: String = "",
         val distance: String = "",
         val name: String = "",
         val creatorUID: String = "",

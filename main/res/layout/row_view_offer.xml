@@ -21,7 +21,7 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/offer_distance_text_view"
+            android:id="@+id/offer_time_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignTop="@+id/offer_amount_text_view"
@@ -45,10 +45,10 @@
             />
 
         <TextView
-            android:id="@+id/offer_time_text_view"
+            android:id="@+id/offer_distance_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/offer_distance_text_view"
+            android:layout_below="@+id/offer_time_text_view"
 
             android:layout_marginLeft="197dp"
             android:layout_marginTop="3dp"

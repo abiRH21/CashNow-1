@@ -1,22 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="match_parent" android:layout_height="match_parent"
+android:orientation="vertical"
+android:layout_width="match_parent" android:layout_height="match_parent"
     >
+    <EditText
+        android:id="@+id/dialog_add_user_amount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="30sp"
+        android:hint="Enter Amount"
+        android:inputType="textCapWords" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="User Currency"/>
+<Spinner
+    android:id="@+id/dialog_add_user_currency_spinner"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_centerHorizontal="true"
+    android:hint="Desired Currency"
+    android:textSize="30sp"
+    />
+<EditText
+    android:id="@+id/dialog_add_desired_amount"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:textSize="30sp"
+    android:hint="Enter Amount"
+    android:inputType="textCapWords" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Desired Currency"/>
     <Spinner
-        android:id="@+id/dialog_add_spinner"
+        android:id="@+id/dialog_add_desired_currency_spinner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:hint="Desired Currency"
         android:textSize="30sp"
         />
-    <EditText
-        android:id="@+id/dialog_add_amount"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="30sp"
-        android:hint="Enter Amount"
-        android:inputType="textCapWords" />
 
 </LinearLayout>

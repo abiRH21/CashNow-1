@@ -182,7 +182,7 @@ class MainActivity : AppCompatActivity(),SplashFragment.OnLoginButtonPressedList
             R.id.navigation_new_offers -> {
                 fab.hide()
                 Fbool = false
-                toolbar.title = "New Offer"
+                toolbar.title = "Settings"
                 switchTo = SettingsFragment()
                 if  ( switchTo != null) {
                     val ft = supportFragmentManager.beginTransaction()
