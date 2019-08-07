@@ -226,9 +226,13 @@ class MainActivity : AppCompatActivity(),SplashFragment.OnLoginButtonPressedList
         spinner1.adapter = ArrayAdapter(this, R.layout.support_simple_spinner_dropdown_item, resources.getStringArray(R.array.currencies)) as SpinnerAdapter?
         spinner2.adapter = ArrayAdapter(this, R.layout.support_simple_spinner_dropdown_item, resources.getStringArray(R.array.currencies)) as SpinnerAdapter?
         builder.setView(view)
-        builder.setTitle("New Offer")
+        builder.setTitle("Filters")
         builder.setPositiveButton(android.R.string.ok) { _,_ ->
-
+//            val userCurrency  = view.dialog_filter_user_currency_filter.getSelectedItem().toString()
+//            val desiredCurrency = view.dialog_add_desired_currency_spinner.getSelectedItem().toString()
+//            val ft = supportFragmentManager.beginTransaction()
+//            ft.replace(R.id.fragment_container, AvailableOffersListFragment.newInstance(Guser.uid , false , Guser ))
+//            ft.commitAllowingStateLoss()
         }
         builder.setNegativeButton(android.R.string.cancel , null)
         builder.create().show()
@@ -239,19 +243,7 @@ class MainActivity : AppCompatActivity(),SplashFragment.OnLoginButtonPressedList
         // as you specify a parent activity in AndroidManifest.xml.
         return when (item.itemId) {
             R.id.action_settings ->{
-//                toolbar.title ="Settings"
-//                var switchTo : Fragment? = null
 //
-//                switchTo = SettingsFragment()
-//                if  ( switchTo != null) {
-//                    val ft = supportFragmentManager.beginTransaction()
-//                    ft.replace(R.id.fragment_container, switchTo)
-//                    while (supportFragmentManager.backStackEntryCount > 0) {
-//                        supportFragmentManager.popBackStackImmediate()
-//                    }
-//                    ft.commit()
-//                }
-              //  auth.signOut()
                 filterDialog()
                 true}
             R.id.action_logout -> {

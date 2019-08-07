@@ -12,14 +12,14 @@ class AcceptedOffersListAdapter (var context: Context?, var listener: AcceptedOf
     val offers = ArrayList<Offer>()
     private var quoteRef = FirebaseFirestore
             .getInstance()
-            .collection("offers")
+            .collection("acceptedOffers")
     lateinit var Cuid : String
     lateinit var thisContext : Context
     init {
         var checkSize : Boolean = false
 
         quoteRef
-                .orderBy(Offer.LAST_TOUCHED_KEY, Query.Direction.ASCENDING).whereEqualTo("accepted","T").whereEqualTo("creatorUID",uid)
+                .orderBy(Offer.LAST_TOUCHED_KEY, Query.Direction.ASCENDING).whereEqualTo("creatorUID",uid)//.whereEqualTo("accepted","T").whereEqualTo("creatorUID",uid)
 
                 .addSnapshotListener { snapshot: QuerySnapshot?, exception: FirebaseFirestoreException? ->
                     if (exception != null) {
@@ -59,56 +59,56 @@ class AcceptedOffersListAdapter (var context: Context?, var listener: AcceptedOf
                   }
 
                 }
-            if (checkSize == true ) {
-                quoteRef = FirebaseFirestore
-                        .getInstance()
-                        .collection("offers")
-
-                quoteRef
-                        .orderBy(Offer.LAST_TOUCHED_KEY, Query.Direction.ASCENDING).whereEqualTo("accepted","T").whereEqualTo("receiverUID",uid)
-
-                .addSnapshotListener { snapshot: QuerySnapshot?, exception: FirebaseFirestoreException? ->
-                    if (exception != null) {
-                        //Log.e(Constants.TAG, "Listen error: $exception")
-                        return@addSnapshotListener
-                    }
-                    for (docChange in snapshot!!.documentChanges) {
-                        val offer = Offer.fromSnapshot(docChange.document)
-                        when (docChange.type) {
-                            DocumentChange.Type.ADDED -> {
-
-                                offers.add(0, offer)
-                                notifyItemInserted(0)
-
-                            }
-                            DocumentChange.Type.REMOVED -> {
-                                val pos = offers.indexOfFirst { offer.id == it.id }
-                                offers.removeAt(pos)
-                                notifyItemRemoved(pos)
-//                                for ((pos,mq) in movieQuotes.withIndex()) {
-//                                if (mq.id == movieQuote.id) {
-//                                    movieQuotes.removeAt(pos)
-//                                    notifyItemRemoved(pos)
-//                                    break
-//                                }
-//                                }
-                            }
-                            DocumentChange.Type.MODIFIED -> {
-                                val pos = offers.indexOfFirst { offer.id == it.id }
-                                offers[pos] = offer
-                                notifyItemChanged(pos)
-                            }
-                        }
-                    }
-
-                }
-
-
-
-
-
-
-            }
+//            if (checkSize == true ) {
+//                quoteRef = FirebaseFirestore
+//                        .getInstance()
+//                        .collection("offers")
+//
+//                quoteRef
+//                        .orderBy(Offer.LAST_TOUCHED_KEY, Query.Direction.ASCENDING).whereEqualTo("accepted","T").whereEqualTo("receiverUID",uid)
+//
+//                .addSnapshotListener { snapshot: QuerySnapshot?, exception: FirebaseFirestoreException? ->
+//                    if (exception != null) {
+//                        //Log.e(Constants.TAG, "Listen error: $exception")
+//                        return@addSnapshotListener
+//                    }
+//                    for (docChange in snapshot!!.documentChanges) {
+//                        val offer = Offer.fromSnapshot(docChange.document)
+//                        when (docChange.type) {
+//                            DocumentChange.Type.ADDED -> {
+//
+//                                offers.add(0, offer)
+//                                notifyItemInserted(0)
+//
+//                            }
+//                            DocumentChange.Type.REMOVED -> {
+//                                val pos = offers.indexOfFirst { offer.id == it.id }
+//                                offers.removeAt(pos)
+//                                notifyItemRemoved(pos)
+////                                for ((pos,mq) in movieQuotes.withIndex()) {
+////                                if (mq.id == movieQuote.id) {
+////                                    movieQuotes.removeAt(pos)
+////                                    notifyItemRemoved(pos)
+////                                    break
+////                                }
+////                                }
+//                            }
+//                            DocumentChange.Type.MODIFIED -> {
+//                                val pos = offers.indexOfFirst { offer.id == it.id }
+//                                offers[pos] = offer
+//                                notifyItemChanged(pos)
+//                            }
+//                        }
+//                    }
+//
+//                }
+//
+//
+//
+//
+//
+//
+//            }
 
     }
     override fun getItemCount() = offers.size

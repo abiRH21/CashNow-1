@@ -18,10 +18,14 @@ class OfferDetailFragment : Fragment() {
     private val quoteRef = FirebaseFirestore
             .getInstance()
             .collection("offers")
+    private val quoteRefAccepted = FirebaseFirestore
+            .getInstance()
+            .collection("acceptedOffers")
     private var offer: Offer? = null
     private var type: Int? = 0
     private var uid: String?= ""
     val offers = ArrayList<Offer>()
+    val acceptedOffers = ArrayList<Offer>()
     init {
         quoteRef
                 .orderBy(Offer.LAST_TOUCHED_KEY, Query.Direction.ASCENDING)//.whereEqualTo("uid",Cuid)
@@ -60,6 +64,55 @@ class OfferDetailFragment : Fragment() {
                     }
 
                 }
+
+
+
+        // snapshot listener for accepted offers
+        quoteRefAccepted
+                .orderBy(Offer.LAST_TOUCHED_KEY, Query.Direction.ASCENDING)//.whereEqualTo("uid",Cuid)
+
+                .addSnapshotListener { snapshot: QuerySnapshot?, exception: FirebaseFirestoreException? ->
+                    if (exception != null) {
+                        //Log.e(Constants.TAG, "Listen error: $exception")
+                        return@addSnapshotListener
+                    }
+                    for (docChange in snapshot!!.documentChanges) {
+                        val offer = Offer.fromSnapshot(docChange.document)
+                        when (docChange.type) {
+                            DocumentChange.Type.ADDED -> {
+
+                                acceptedOffers.add(0, offer)
+
+                            }
+                            DocumentChange.Type.REMOVED -> {
+                                val pos = acceptedOffers.indexOfFirst { offer.id == it.id }
+                                acceptedOffers.removeAt(pos)
+                                // notifyItemRemoved(pos)
+//                                for ((pos,mq) in movieQuotes.withIndex()) {
+//                                if (mq.id == movieQuote.id) {
+//                                    movieQuotes.removeAt(pos)
+//                                    notifyItemRemoved(pos)
+//                                    break
+//                                }
+//                                }
+                            }
+                            DocumentChange.Type.MODIFIED -> {
+                                val pos = acceptedOffers.indexOfFirst { offer.id == it.id }
+                                acceptedOffers[pos] = offer
+                                // notifyItemChanged(pos)
+                            }
+                        }
+                    }
+
+                }
+
+
+
+
+
+
+
+
     }
     companion object {
 
@@ -116,7 +169,10 @@ class OfferDetailFragment : Fragment() {
                     quoteRef.document(pos).set(newOffer).addOnSuccessListener {
                         Log.d("CCC", offers.toString())
                     }
-
+                    val acceptedOffer1 : Offer = Offer(offer!!.userAmount, offer!!.userCurrency, offer!!.desiredAmount, offer!!.desiredCurrency, offer!!.distance, offer!!.name, offer!!.creatorUID, uid!!)
+                    val acceptedOffer2 : Offer = Offer(offer!!.userAmount, offer!!.userCurrency, offer!!.desiredAmount, offer!!.desiredCurrency, offer!!.distance, offer!!.name, uid!!,offer!!.creatorUID)
+                    quoteRefAccepted.add(acceptedOffer1)
+                    quoteRefAccepted.add(acceptedOffer2)
         }
         return view
     }
