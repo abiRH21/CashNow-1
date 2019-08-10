@@ -153,6 +153,7 @@ class MainActivity : AppCompatActivity(),SplashFragment.OnLoginButtonPressedList
         when (item.itemId) {
             R.id.navigation_my_offers -> {
                 fab.hide()
+                filterItem!!.setVisible(false)
                 Fbool = false
                 toolbar.title = "My Posted Offers History"
                // Toast.makeText(this,"Changed", Toast.LENGTH_LONG).show()
@@ -162,6 +163,7 @@ class MainActivity : AppCompatActivity(),SplashFragment.OnLoginButtonPressedList
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_available_offers -> {
+                filterItem!!.setVisible(true)
                 fab.show()
                 Fbool = false
                 toolbar.title = "All Available Offers"
@@ -171,6 +173,7 @@ class MainActivity : AppCompatActivity(),SplashFragment.OnLoginButtonPressedList
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_accepted_offers -> {
+                filterItem!!.setVisible(false)
                 fab.hide()
                 Fbool = true
                 toolbar.title = "My Accepted Offers"
@@ -180,6 +183,7 @@ class MainActivity : AppCompatActivity(),SplashFragment.OnLoginButtonPressedList
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_new_offers -> {
+                filterItem!!.setVisible(false)
                 fab.hide()
                 Fbool = false
                 toolbar.title = "Settings"
@@ -211,10 +215,11 @@ class MainActivity : AppCompatActivity(),SplashFragment.OnLoginButtonPressedList
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
 
     }
-
+    var filterItem : MenuItem? = null
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.menu_main, menu)
+        filterItem =  menu.findItem(R.id.action_settings)
         return true
     }
 
@@ -238,6 +243,7 @@ class MainActivity : AppCompatActivity(),SplashFragment.OnLoginButtonPressedList
         builder.setNegativeButton(android.R.string.cancel , null)
         builder.create().show()
     }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
