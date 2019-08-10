@@ -84,7 +84,7 @@ class MainActivity : AppCompatActivity(),SplashFragment.OnLoginButtonPressedList
 //              //  ft.commitAllowingStateLoss()
 
                 val ft = supportFragmentManager.beginTransaction()
-                ft.replace(R.id.fragment_container, AvailableOffersListFragment.newInstance(user.uid , false , Guser))
+                ft.replace(R.id.fragment_container, AvailableOffersListFragment.newInstance(user.uid , false , Guser,"none","none"))
                 ft.commitAllowingStateLoss()
 
             } else {
@@ -166,7 +166,7 @@ class MainActivity : AppCompatActivity(),SplashFragment.OnLoginButtonPressedList
                 Fbool = false
                 toolbar.title = "All Available Offers"
                 val ft = supportFragmentManager.beginTransaction()
-                ft.replace(R.id.fragment_container, AvailableOffersListFragment.newInstance(Guser.uid , false , Guser ))
+                ft.replace(R.id.fragment_container, AvailableOffersListFragment.newInstance(Guser.uid , false , Guser ,"none","none"))
                 ft.commitAllowingStateLoss()
                 return@OnNavigationItemSelectedListener true
             }
@@ -228,11 +228,12 @@ class MainActivity : AppCompatActivity(),SplashFragment.OnLoginButtonPressedList
         builder.setView(view)
         builder.setTitle("Filters")
         builder.setPositiveButton(android.R.string.ok) { _,_ ->
-//            val userCurrency  = view.dialog_filter_user_currency_filter.getSelectedItem().toString()
-//            val desiredCurrency = view.dialog_add_desired_currency_spinner.getSelectedItem().toString()
-//            val ft = supportFragmentManager.beginTransaction()
-//            ft.replace(R.id.fragment_container, AvailableOffersListFragment.newInstance(Guser.uid , false , Guser ))
-//            ft.commitAllowingStateLoss()
+            val userCurrency  = view.dialog_filter_user_currency_filter.getSelectedItem().toString()
+            val desiredCurrency = view.dialog_filter_desired_currency.getSelectedItem().toString()
+            Log.d("FFF","$userCurrency and $desiredCurrency")
+            val ft = supportFragmentManager.beginTransaction()
+            ft.replace(R.id.fragment_container, AvailableOffersListFragment.newInstance(Guser.uid , false , Guser,userCurrency,desiredCurrency ))
+            ft.commitAllowingStateLoss()
         }
         builder.setNegativeButton(android.R.string.cancel , null)
         builder.create().show()

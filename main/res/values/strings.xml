@@ -24,6 +24,7 @@
     <string name="login">Login</string>
     <string name="icon">Icon</string>
     <string-array name="currencies">
+        <item>none</item>
         <item>U.S Dollars</item>
         <item>Rupees</item>
         <item>Dirhams</item>

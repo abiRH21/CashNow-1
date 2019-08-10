@@ -31,6 +31,8 @@ import kotlinx.android.synthetic.main.fragment_offer_detail.view.*
 
 private const val ARG_UID = "UID"
 private const val ARG_USER = "USER"
+private const val ARG_U_CURRENCY ="U_CURRENCY"
+private const val ARG_D_CURRENCY ="D_CURRENCY"
 class AvailableOffersListFragment : Fragment() {
     private var locationManager : LocationManager? = null
     var userLongitude : String = ""
@@ -43,7 +45,8 @@ class AvailableOffersListFragment : Fragment() {
 
     var currencies = arrayOf("Rupees","Dollars", "Rubles")
 
-
+    private var userCurrency : String? = null
+    private var desiredCurrency: String? =null
 
 
 
@@ -52,7 +55,7 @@ class AvailableOffersListFragment : Fragment() {
     ): View? {
         val recyclerView = inflater.inflate(R.layout.fragment_offers_list, container, false) as RecyclerView
         Log.d("XOXO", "$userLongitude $userLatitude")
-        adapter = AvailableOffersListAdapter(context, listener, "")
+        adapter = AvailableOffersListAdapter(context, listener, "", userCurrency , desiredCurrency)
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.setHasFixedSize(true)
@@ -114,6 +117,8 @@ class AvailableOffersListFragment : Fragment() {
         arguments?.let {
             uid = it.getString(ARG_UID)
             user = it.getParcelable(ARG_USER)
+            userCurrency = it.getString(ARG_U_CURRENCY)
+            desiredCurrency =it.getString(ARG_D_CURRENCY)
         }
 
 
@@ -160,11 +165,13 @@ class AvailableOffersListFragment : Fragment() {
     }
     companion object {
         @JvmStatic
-        fun newInstance(uid: String , filter : Boolean, user: FirebaseUser) =
+        fun newInstance(uid: String , filter : Boolean, user: FirebaseUser, userCurrency : String , desiredCurrency : String) =
                 AvailableOffersListFragment().apply {
                     arguments = Bundle().apply {
                         putString(ARG_UID, uid)
                         putParcelable(ARG_USER, user)
+                        putString(ARG_U_CURRENCY, userCurrency)
+                        putString(ARG_D_CURRENCY, desiredCurrency)
 
                     }
                 }
