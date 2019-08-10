@@ -1,5 +1,6 @@
 package com.example.raghura.cashnowapp
 
+import android.content.Intent
 import android.opengl.Visibility
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -7,6 +8,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.google.firebase.firestore.*
 import kotlinx.android.synthetic.main.fragment_offer_detail.view.*
 
@@ -165,7 +167,7 @@ class OfferDetailFragment : Fragment() {
                         pos = o.id
                         cID = o.creatorUID
                     }
-                    val newOffer: Offer = Offer(offer!!.userAmount, offer!!.userCurrency, offer!!.desiredAmount, offer!!.desiredCurrency, offer!!.distance, offer!!.name, offer!!.creatorUID, uid!!, "T")
+                    val newOffer: Offer = Offer(offer!!.userAmount, offer!!.userCurrency, offer!!.desiredAmount, offer!!.desiredCurrency, offer!!.distance, offer!!.name, offer!!.creatorUID, uid!!, "T", offer!!.longitude , offer!!.latitude)
                     quoteRef.document(pos).set(newOffer).addOnSuccessListener {
                         Log.d("CCC", offers.toString())
                     }
@@ -174,6 +176,10 @@ class OfferDetailFragment : Fragment() {
                     val acceptedOffer2 : Offer = Offer(offer!!.userAmount, offer!!.userCurrency, offer!!.desiredAmount, offer!!.desiredCurrency, offer!!.distance, offer!!.name, uid!!,offer!!.creatorUID)
                     quoteRefAccepted.add(acceptedOffer1)
                     quoteRefAccepted.add(acceptedOffer2)
+                    Toast.makeText(context,"Successfully accepted offer!", Toast.LENGTH_LONG).show()
+                    val intent = Intent(context, MainActivity::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+                    startActivity(intent)
         }
         return view
     }

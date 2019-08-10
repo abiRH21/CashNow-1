@@ -1,9 +1,14 @@
 package com.example.raghura.cashnowapp
 
+import android.location.LocationManager
+import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.View
 import android.widget.TextView
 import kotlinx.android.synthetic.main.row_view_offer.view.*
+import java.time.Duration
+import java.util.*
 
 class MyOffersViewHolder (itemView: View, adapter: MyOffersListAdapter) : RecyclerView.ViewHolder(itemView)  {
     private val amountTextView = itemView.offer_amount_text_view as TextView
@@ -15,11 +20,76 @@ class MyOffersViewHolder (itemView: View, adapter: MyOffersListAdapter) : Recycl
             adapter.selectOfferAt(adapterPosition)
         }
     }
-    fun bind (offer: Offer) {
+    private fun getDuration(d1: Date, d2: Date): String {
+        var diff = Duration.between(d1.toInstant(), d2.toInstant())
+
+
+        val days = diff.toDays()
+        diff = diff.minusDays(days)
+        val hours = diff.toHours()
+        diff = diff.minusHours(hours)
+        val minutes = diff.toMinutes()
+        diff = diff.minusMinutes(minutes)
+        val seconds = diff.toMillis()
+
+        val formattedDiff = StringBuilder()
+        if (days != 0L) {
+            if (days == 1L) {
+                formattedDiff.append( "$days Day ")
+
+            } else {
+                formattedDiff.append("$days Days ")
+            }
+        }
+        if (hours != 0L) {
+            if (hours == 1L) {
+                formattedDiff.append("$hours hour ")
+            } else {
+                formattedDiff.append("$hours hours ")
+            }
+        }
+        if (minutes != 0L) {
+            if (minutes == 1L) {
+                formattedDiff.append("$minutes minute ")
+            } else {
+                formattedDiff.append("$minutes minutes ")
+            }
+        }
+
+
+
+        return formattedDiff.toString()
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    fun bind(offer: Offer) {
+
+
+        // Location.distanceBetween(37.421998333333335,-122.08400000000002, 37.421998333333335,-122.08400000000002, result)
+        //   Log.d("OXOXO","${result[0].toInt().toString()} is the distance ")
+        var diff : String  = getDuration(offer.created , Date(System.currentTimeMillis()))
         amountTextView.text = "${offer.userAmount} ${offer.userCurrency} for ${offer.desiredAmount} ${offer.desiredCurrency}"
-        distanceTextView.text = "Distance: ${offer.distance} miles"
+        distanceTextView.text = ""
         nameTextView.text = "by ${offer.name}"
-        timeTextView.text = "Posted 25 mins ago"
+        if (diff.equals("")){
+            diff = "0 minutes ago"
+            timeTextView.text = "$diff"
+        } else {
+            timeTextView.text = "$diff ago"
+        }
 
     }
 }

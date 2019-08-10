@@ -6,6 +6,7 @@ import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.Exclude
 import com.google.firebase.firestore.ServerTimestamp
 import kotlinx.android.parcel.Parcelize
+import java.util.*
 
 @Parcelize
 data class Offer (
@@ -19,7 +20,8 @@ data class Offer (
         val receiverUID:String ="",
         val accepted: String = "",
         val longitude: String = "",
-        val latitude: String = ""
+        val latitude: String = "",
+        val created: Date = Date(System.currentTimeMillis())
 ) : Parcelable
 {
     @get:Exclude

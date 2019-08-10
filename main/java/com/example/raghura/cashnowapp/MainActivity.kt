@@ -182,22 +182,7 @@ class MainActivity : AppCompatActivity(),SplashFragment.OnLoginButtonPressedList
                 ft.commitAllowingStateLoss()
                 return@OnNavigationItemSelectedListener true
             }
-            R.id.navigation_new_offers -> {
-                filterItem!!.setVisible(false)
-                fab.hide()
-                Fbool = false
-                toolbar.title = "Settings"
-                switchTo = SettingsFragment()
-                if  ( switchTo != null) {
-                    val ft = supportFragmentManager.beginTransaction()
-                    ft.replace(R.id.fragment_container, switchTo)
-                    while (supportFragmentManager.backStackEntryCount > 0) {
-                        supportFragmentManager.popBackStackImmediate()
-                    }
-                    ft.commit()
-                }
-                return@OnNavigationItemSelectedListener true
-            }
+
         }
         false
     }

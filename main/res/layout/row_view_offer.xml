@@ -19,7 +19,7 @@
             android:text="Amount:200 U.S Dollars"
             android:textStyle="bold" />
         <TextView
-            android:id="@+id/offer_distance_text_view"
+            android:id="@+id/offer_time_text_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/offer_amount_text_view"
@@ -31,13 +31,13 @@
             android:id="@+id/offer_name_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/offer_distance_text_view"
+            android:layout_below="@+id/offer_time_text_view"
             android:text="by Abilash Raghuram"
             android:layout_weight="0.5"
             android:textSize="13sp" />
 
         <TextView
-            android:id="@+id/offer_time_text_view"
+            android:id="@+id/offer_distance_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/offer_name_text_view"
