@@ -30,7 +30,7 @@ class AvailableOffersViewHolder (itemView: View, adapter: AvailableOffersListAda
             //latitude.setText("" + location.longitude + ":" + location.latitude);
             userLong = location.longitude
             userLat = location.latitude
-            Location.distanceBetween(userLat,userLong, userOffer!!.latitude.toDouble(),200.0, result)
+            Location.distanceBetween(userLat,userLong, userOffer!!.latitude.toDouble(),userOffer!!.longitude.toDouble(), result)
             var number : Float =  1609.344F
             result[0] = result[0]/ number
             distanceTextView.text = "Distance: ${result[0].toString()} miles"
@@ -57,7 +57,7 @@ class AvailableOffersViewHolder (itemView: View, adapter: AvailableOffersListAda
         locationManager = userContext.getSystemService(AppCompatActivity.LOCATION_SERVICE) as LocationManager?
         try {
             // Request location updates
-            locationManager?.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0L, 0f, locationListener)
+            locationManager?.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0L, 0f, locationListener)
             //Log.d("OXOXO","${userLat}")
         } catch(ex: SecurityException) {
             Log.d("myTag", "Security Exception, no location available");
@@ -68,7 +68,7 @@ class AvailableOffersViewHolder (itemView: View, adapter: AvailableOffersListAda
         amountTextView.text = "${offer.userAmount} ${offer.userCurrency} for ${offer.desiredAmount} ${offer.desiredCurrency}"
         distanceTextView.text = "Calculating distance..."
         nameTextView.text = "by ${offer.name}"
-        timeTextView.text = "Posted 25 mins ago"
+        timeTextView.text = "25 mins ago"
 
     }
 }
