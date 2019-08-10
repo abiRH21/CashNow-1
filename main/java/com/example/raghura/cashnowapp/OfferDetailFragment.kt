@@ -169,6 +169,7 @@ class OfferDetailFragment : Fragment() {
                     quoteRef.document(pos).set(newOffer).addOnSuccessListener {
                         Log.d("CCC", offers.toString())
                     }
+                  //  quoteRef.document(pos).delete()
                     val acceptedOffer1 : Offer = Offer(offer!!.userAmount, offer!!.userCurrency, offer!!.desiredAmount, offer!!.desiredCurrency, offer!!.distance, offer!!.name, offer!!.creatorUID, uid!!)
                     val acceptedOffer2 : Offer = Offer(offer!!.userAmount, offer!!.userCurrency, offer!!.desiredAmount, offer!!.desiredCurrency, offer!!.distance, offer!!.name, uid!!,offer!!.creatorUID)
                     quoteRefAccepted.add(acceptedOffer1)

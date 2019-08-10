@@ -19,7 +19,7 @@ class AvailableOffersListAdapter (var context: Context?, var listener: Available
     lateinit var thisContext : Context
     init {
         quoteRef
-                .orderBy(Offer.LAST_TOUCHED_KEY, Query.Direction.ASCENDING)//.whereEqualTo("uid",Cuid)
+                .orderBy(Offer.LAST_TOUCHED_KEY, Query.Direction.ASCENDING).whereEqualTo("accepted","F")
 
                 .addSnapshotListener { snapshot: QuerySnapshot?, exception: FirebaseFirestoreException? ->
                     if (exception != null) {
@@ -68,7 +68,7 @@ class AvailableOffersListAdapter (var context: Context?, var listener: Available
         val view = LayoutInflater.from(context).inflate(R.layout.row_view_offer, parent, false)
 
         Gview = view
-        return AvailableOffersViewHolder(view, this)
+        return AvailableOffersViewHolder(view, this , context)
 
 
     }

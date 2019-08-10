@@ -1,9 +1,15 @@
 package com.example.raghura.cashnowapp
 
 import android.content.Context
+import android.content.Context.LOCATION_SERVICE
+import android.location.Location
+import android.location.LocationListener
+import android.location.LocationManager
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v4.content.ContextCompat.getSystemService
 import android.support.v7.app.AlertDialog
+import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.Log
@@ -26,6 +32,9 @@ import kotlinx.android.synthetic.main.fragment_offer_detail.view.*
 private const val ARG_UID = "UID"
 private const val ARG_USER = "USER"
 class AvailableOffersListFragment : Fragment() {
+    private var locationManager : LocationManager? = null
+    var userLongitude : String = ""
+    var userLatitude: String = ""
     private var user: FirebaseUser? = null
     private var uid: String? = null
     private var offerList : ArrayList<Offer>? = null
@@ -34,10 +43,15 @@ class AvailableOffersListFragment : Fragment() {
 
     var currencies = arrayOf("Rupees","Dollars", "Rubles")
 
+
+
+
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?
     ): View? {
         val recyclerView = inflater.inflate(R.layout.fragment_offers_list, container, false) as RecyclerView
+        Log.d("XOXO", "$userLongitude $userLatitude")
         adapter = AvailableOffersListAdapter(context, listener, "")
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(context)
@@ -74,7 +88,7 @@ class AvailableOffersListFragment : Fragment() {
             val userCurrency = view.dialog_add_user_currency_spinner.getSelectedItem().toString()
             val desiredCurrency = view.dialog_add_desired_currency_spinner.getSelectedItem().toString()
 
-            adapter.add(Offer(userAmount,userCurrency,desiredAmount,desiredCurrency,"0.2 miles", user!!.displayName!!, uid!!))
+            adapter.add(Offer(userAmount,userCurrency,desiredAmount,desiredCurrency,"0.2 miles", user!!.displayName!!, uid!!,"","F",userLongitude,userLatitude))
 
         }
         builder.setNegativeButton(android.R.string.cancel , null)
@@ -102,6 +116,22 @@ class AvailableOffersListFragment : Fragment() {
             user = it.getParcelable(ARG_USER)
         }
 
+
+    }
+    private val locationListener: LocationListener = object : LocationListener {
+        override fun onLocationChanged(location: Location) {
+            Log.d("myTag","${location.longitude} ${location.latitude}")
+            userLongitude = location.longitude.toString()
+            userLatitude = location.latitude.toString()
+           // latitude.setText("" + location.longitude + ":" + location.latitude)
+            val result : FloatArray = FloatArray(10)
+            Location.distanceBetween(location.latitude,location.longitude, 37.42199833333,-122.08400000, result)
+            // result[0] is the distance in metres
+            Log.d("myTag", result[0].toString())
+        }
+        override fun onStatusChanged(provider: String, status: Int, extras: Bundle) {}
+        override fun onProviderEnabled(provider: String) {}
+        override fun onProviderDisabled(provider: String) {}
     }
 
     override fun onAttach(context: Context) {
@@ -110,6 +140,14 @@ class AvailableOffersListFragment : Fragment() {
             listener = context
         } else {
             throw RuntimeException(context.toString() + " must implement OnDocSelectedListener")
+        }
+        locationManager = context!!.getSystemService(LOCATION_SERVICE) as LocationManager?
+        Log.d("myTag",locationManager.toString())
+        try {
+            // Request location updates
+            locationManager?.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0L, 0f, locationListener)
+        } catch(ex: SecurityException) {
+            Log.d("myTag", "Security Exception, no location available")
         }
     }
     override fun onDetach() {

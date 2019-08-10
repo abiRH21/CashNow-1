@@ -114,7 +114,7 @@ class MainActivity : AppCompatActivity(),SplashFragment.OnLoginButtonPressedList
         val loginIntent =  AuthUI.getInstance()
                 .createSignInIntentBuilder()
                 .setAvailableProviders(providers)
-                .setLogo(R.drawable.logo)
+                .setLogo(R.drawable.applogo)
                 .build()
 // Create and launch sign-in intent
         startActivityForResult(

@@ -1,6 +1,7 @@
 package com.example.raghura.cashnowapp
 
 import android.content.Context
+import android.location.LocationManager
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
