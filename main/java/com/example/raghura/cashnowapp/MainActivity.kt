@@ -55,33 +55,7 @@ class MainActivity : AppCompatActivity(),SplashFragment.OnLoginButtonPressedList
                 Log.d(Constants.TAG,"Email: ${user.email}")
                 Log.d(Constants.TAG,"Phone: ${user.phoneNumber}")
                 Log.d(Constants.TAG,"Photo: ${user.photoUrl}")
-                //switchToMovieQuoteFragment(user.uid)
-                Toast.makeText(this, "made it ", Toast.LENGTH_LONG)
-//                var switchTo : Fragment? = null
-//                switchTo = PicFragment()
-//
-//                if  ( switchTo != null) {
-//                    val ft = supportFragmentManager.beginTransaction()
-//                    ft.replace(R.id.fragment_container, switchTo)
-//                    while (supportFragmentManager.backStackEntryCount > 0) {
-//                        supportFragmentManager.popBackStackImmediate()
-//                    }
-//                    ft.commitAllowingStateLoss()
-//                }
-            //    val ft = supportFragmentManager.beginTransaction()
-              //  ft.replace(R.id.fragment_container, PicFragment.newInstance(user.uid , false ))
-//                var switchTo : Fragment? = null
-//
-//                switchTo = AvailableOffersListFragment()
-//                if  ( switchTo != null) {
-//                    val ft = supportFragmentManager.beginTransaction()
-//                    ft.replace(R.id.fragment_container, switchTo)
-//                    while (supportFragmentManager.backStackEntryCount > 0) {
-//                        supportFragmentManager.popBackStackImmediate()
-//                    }
-//                    ft.commitAllowingStateLoss()
-//                }
-//              //  ft.commitAllowingStateLoss()
+                Toast.makeText(this,"Welcome ${user!!.displayName}!", Toast.LENGTH_LONG).show()
 
                 val ft = supportFragmentManager.beginTransaction()
                 ft.replace(R.id.fragment_container, AvailableOffersListFragment.newInstance(user.uid , false , Guser,"none","none"))
@@ -155,7 +129,7 @@ class MainActivity : AppCompatActivity(),SplashFragment.OnLoginButtonPressedList
                 fab.hide()
                 filterItem!!.setVisible(false)
                 Fbool = false
-                toolbar.title = "My Posted Offers History"
+                toolbar.title = "Offers History"
                // Toast.makeText(this,"Changed", Toast.LENGTH_LONG).show()
                 val ft = supportFragmentManager.beginTransaction()
                 ft.replace(R.id.fragment_container, MyOffersListFragment.newInstance(Guser.uid , false ))
@@ -166,7 +140,7 @@ class MainActivity : AppCompatActivity(),SplashFragment.OnLoginButtonPressedList
                 filterItem!!.setVisible(true)
                 fab.show()
                 Fbool = false
-                toolbar.title = "All Available Offers"
+                toolbar.title = "Available Offers"
                 val ft = supportFragmentManager.beginTransaction()
                 ft.replace(R.id.fragment_container, AvailableOffersListFragment.newInstance(Guser.uid , false , Guser ,"none","none"))
                 ft.commitAllowingStateLoss()
@@ -176,7 +150,7 @@ class MainActivity : AppCompatActivity(),SplashFragment.OnLoginButtonPressedList
                 filterItem!!.setVisible(false)
                 fab.hide()
                 Fbool = true
-                toolbar.title = "My Accepted Offers"
+                toolbar.title = "Accepted Offers"
                 val ft = supportFragmentManager.beginTransaction()
                 ft.replace(R.id.fragment_container, AcceptedOffersListFragment.newInstance(Guser.uid , false ))
                 ft.commitAllowingStateLoss()
@@ -216,7 +190,7 @@ class MainActivity : AppCompatActivity(),SplashFragment.OnLoginButtonPressedList
         spinner1.adapter = ArrayAdapter(this, R.layout.support_simple_spinner_dropdown_item, resources.getStringArray(R.array.currencies)) as SpinnerAdapter?
         spinner2.adapter = ArrayAdapter(this, R.layout.support_simple_spinner_dropdown_item, resources.getStringArray(R.array.currencies)) as SpinnerAdapter?
         builder.setView(view)
-        builder.setTitle("Filters")
+        builder.setTitle("Set a Currency Filter")
         builder.setPositiveButton(android.R.string.ok) { _,_ ->
             val userCurrency  = view.dialog_filter_user_currency_filter.getSelectedItem().toString()
             val desiredCurrency = view.dialog_filter_desired_currency.getSelectedItem().toString()
