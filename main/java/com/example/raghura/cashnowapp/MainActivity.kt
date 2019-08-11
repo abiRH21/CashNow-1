@@ -76,7 +76,7 @@ class MainActivity : AppCompatActivity(),SplashFragment.OnLoginButtonPressedList
                 Log.d(Constants.TAG,"Email: ${user.email}")
                 Log.d(Constants.TAG,"Phone: ${user.phoneNumber}")
                 Log.d(Constants.TAG,"Photo: ${user.photoUrl}")
-                Toast.makeText(this,"Welcome ${user!!.displayName}!", Toast.LENGTH_LONG).show()
+               // Toast.makeText(this,"Welcome ${user!!.displayName}!", Toast.LENGTH_LONG).show()
 
                 val ft = supportFragmentManager.beginTransaction()
                 ft.replace(R.id.fragment_container, AvailableOffersListFragment.newInstance(user.uid , false , Guser,"none","none"))
@@ -113,7 +113,7 @@ class MainActivity : AppCompatActivity(),SplashFragment.OnLoginButtonPressedList
         val loginIntent =  AuthUI.getInstance()
                 .createSignInIntentBuilder()
                 .setAvailableProviders(providers)
-                .setLogo(R.drawable.applogo)
+                .setLogo(R.drawable.dollar)
                 .build()
 // Create and launch sign-in intent
         startActivityForResult(
@@ -190,26 +190,7 @@ class MainActivity : AppCompatActivity(),SplashFragment.OnLoginButtonPressedList
         setContentView(R.layout.activity_main)
         toolbar.title = "Available Offers"
         setSupportActionBar(toolbar)
-//      val lm = this.getSystemService(LOCATION_SERVICE) as LocationManager
-//var gps_enabled : Boolean = false;
-//var network_enabled: Boolean = false;
-//
-//try {
-//    gps_enabled = lm.isProviderEnabled(LocationManager.GPS_PROVIDER);
-//} catch(ex : Exception) {}
-//
-//try {
-//    network_enabled = lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
-//} catch(ex : Exception ) {}
-//        val locationProviders :String = Settings.Secure.getString(getContentResolver(), Settings.Secure.LOCATION_PROVIDERS_ALLOWED);
-//        if (!TextUtils.isEmpty(locationProviders)) {
-//            AlertDialog.Builder(this)
-//                    .setTitle("This App requires Location Services")  // GPS not found
-//                    .setMessage("Please hit yes to go to settings and enable location") // Want to enable?
-//                    .setPositiveButton("yes", DialogInterface.OnClickListener { dialogInterface, i -> startActivity(Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS)) })
-//                    .setNegativeButton("no", null)
-//                    .show()
-//        }
+
         setupPermissions()
         initializeListeners()
 //

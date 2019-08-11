@@ -83,7 +83,7 @@ class AvailableOffersListFragment : Fragment() {
         userCurrencyspinner.adapter = ArrayAdapter(activity, R.layout.support_simple_spinner_dropdown_item, resources.getStringArray(R.array.currencies)) as SpinnerAdapter?
         desiredCurrencyspinner.adapter = ArrayAdapter(activity, R.layout.support_simple_spinner_dropdown_item, resources.getStringArray(R.array.currencies)) as SpinnerAdapter?
         builder.setView(view)
-        builder.setTitle("New Offer")
+        builder.setTitle("Create a new Offer")
         builder.setPositiveButton(android.R.string.ok) { _,_ ->
 
             val userAmount = view.dialog_add_user_amount.text.toString()
