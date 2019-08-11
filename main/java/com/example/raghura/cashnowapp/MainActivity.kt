@@ -21,6 +21,16 @@ import com.google.firebase.auth.FirebaseUser
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.dialog_add.view.*
 import kotlinx.android.synthetic.main.dialog_filter.view.*
+import android.R.string.no
+import android.content.Intent
+import android.support.v4.content.ContextCompat.startActivity
+import android.content.DialogInterface
+import android.R.string.yes
+import android.location.LocationManager
+import android.content.Context.LOCATION_SERVICE
+import android.support.v4.content.ContextCompat.getSystemService
+
+
 
 class MainActivity : AppCompatActivity(),SplashFragment.OnLoginButtonPressedListener, MyOffersListFragment.OnOfferSelectedListener  , AcceptedOffersListFragment.OnOfferSelectedListenerAccepted , AvailableOffersListFragment.OnOfferSelectedListener {
     var Fbool : Boolean = false
@@ -66,6 +76,10 @@ class MainActivity : AppCompatActivity(),SplashFragment.OnLoginButtonPressedList
             }
         }
 
+
+    }
+
+    private fun checkLocation() {
 
     }
     private fun switchToSplashFragment() {
@@ -173,6 +187,15 @@ class MainActivity : AppCompatActivity(),SplashFragment.OnLoginButtonPressedList
 //        }
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
 
+        val locationManager = getSystemService(LOCATION_SERVICE) as LocationManager
+        if (!locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
+            AlertDialog.Builder(this)
+                    .setTitle("This App required Location Services")  // GPS not found
+                    .setMessage("Please hit yes to go to settings and enable location") // Want to enable?
+                    .setPositiveButton("yes", DialogInterface.OnClickListener { dialogInterface, i -> startActivity(Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS)) })
+                    .setNegativeButton("no", null)
+                    .show()
+        }
     }
     var filterItem : MenuItem? = null
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
