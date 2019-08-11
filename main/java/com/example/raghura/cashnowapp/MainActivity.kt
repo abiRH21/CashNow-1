@@ -26,17 +26,21 @@ import android.content.Intent
 import android.support.v4.content.ContextCompat.startActivity
 import android.content.DialogInterface
 import android.R.string.yes
+import android.content.Context
 import android.location.LocationManager
 import android.content.Context.LOCATION_SERVICE
 import android.support.v4.content.ContextCompat.getSystemService
 import android.content.Context.LOCATION_SERVICE
+import android.content.pm.PackageManager
 import android.provider.Settings
 import android.support.v4.content.ContextCompat.getSystemService
 import android.provider.Settings.Secure
 import android.provider.Settings.Secure.LOCATION_MODE_OFF
 import android.provider.Settings.Secure.LOCATION_MODE
+import android.support.v4.content.ContextCompat
 import android.text.TextUtils
 import java.lang.Exception
+import java.util.jar.Manifest
 
 
 class MainActivity : AppCompatActivity(),SplashFragment.OnLoginButtonPressedListener, MyOffersListFragment.OnOfferSelectedListener  , AcceptedOffersListFragment.OnOfferSelectedListenerAccepted , AvailableOffersListFragment.OnOfferSelectedListener {
@@ -197,15 +201,16 @@ class MainActivity : AppCompatActivity(),SplashFragment.OnLoginButtonPressedList
 //try {
 //    network_enabled = lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
 //} catch(ex : Exception ) {}
-        val locationProviders :String = Settings.Secure.getString(getContentResolver(), Settings.Secure.LOCATION_PROVIDERS_ALLOWED);
-        if (!TextUtils.isEmpty(locationProviders)) {
-            AlertDialog.Builder(this)
-                    .setTitle("This App requires Location Services")  // GPS not found
-                    .setMessage("Please hit yes to go to settings and enable location") // Want to enable?
-                    .setPositiveButton("yes", DialogInterface.OnClickListener { dialogInterface, i -> startActivity(Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS)) })
-                    .setNegativeButton("no", null)
-                    .show()
-        }
+//        val locationProviders :String = Settings.Secure.getString(getContentResolver(), Settings.Secure.LOCATION_PROVIDERS_ALLOWED);
+//        if (!TextUtils.isEmpty(locationProviders)) {
+//            AlertDialog.Builder(this)
+//                    .setTitle("This App requires Location Services")  // GPS not found
+//                    .setMessage("Please hit yes to go to settings and enable location") // Want to enable?
+//                    .setPositiveButton("yes", DialogInterface.OnClickListener { dialogInterface, i -> startActivity(Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS)) })
+//                    .setNegativeButton("no", null)
+//                    .show()
+//        }
+        setupPermissions()
         initializeListeners()
 //
 //        fab.setOnClickListener { view ->
@@ -215,6 +220,20 @@ class MainActivity : AppCompatActivity(),SplashFragment.OnLoginButtonPressedList
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
 
 
+    }
+
+    private fun setupPermissions() {
+        val permission = ContextCompat.checkSelfPermission(this,
+               android.Manifest.permission.ACCESS_FINE_LOCATION)
+
+        if (permission != PackageManager.PERMISSION_GRANTED) {
+            AlertDialog.Builder(this)
+                    .setTitle("This App requires Location Services")  // GPS not found
+                    .setMessage("Please hit yes to go to settings and enable location") // Want to enable?
+                    .setPositiveButton("yes", DialogInterface.OnClickListener { dialogInterface, i -> startActivity(Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS)) })
+                    .setNegativeButton("no", null)
+                    .show()
+        }
     }
     var filterItem : MenuItem? = null
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
