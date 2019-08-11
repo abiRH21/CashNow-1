@@ -114,7 +114,7 @@ class AvailableOffersViewHolder (itemView: View, adapter: AvailableOffersListAda
         locationManager = userContext.getSystemService(AppCompatActivity.LOCATION_SERVICE) as LocationManager?
         try {
             // Request location updates
-            locationManager?.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0L, 0f, locationListener)
+            locationManager?.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0L, 0f, locationListener)
             //Log.d("OXOXO","${userLat}")
         } catch(ex: SecurityException) {
             Log.d("myTag", "Security Exception, no location available");

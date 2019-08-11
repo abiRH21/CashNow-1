@@ -29,7 +29,14 @@ import android.R.string.yes
 import android.location.LocationManager
 import android.content.Context.LOCATION_SERVICE
 import android.support.v4.content.ContextCompat.getSystemService
-
+import android.content.Context.LOCATION_SERVICE
+import android.provider.Settings
+import android.support.v4.content.ContextCompat.getSystemService
+import android.provider.Settings.Secure
+import android.provider.Settings.Secure.LOCATION_MODE_OFF
+import android.provider.Settings.Secure.LOCATION_MODE
+import android.text.TextUtils
+import java.lang.Exception
 
 
 class MainActivity : AppCompatActivity(),SplashFragment.OnLoginButtonPressedListener, MyOffersListFragment.OnOfferSelectedListener  , AcceptedOffersListFragment.OnOfferSelectedListenerAccepted , AvailableOffersListFragment.OnOfferSelectedListener {
@@ -142,7 +149,7 @@ class MainActivity : AppCompatActivity(),SplashFragment.OnLoginButtonPressedList
             R.id.navigation_my_offers -> {
                 fab.hide()
                 filterItem!!.setVisible(false)
-                Fbool = false
+                Fbool = true
                 toolbar.title = "Offers History"
                // Toast.makeText(this,"Changed", Toast.LENGTH_LONG).show()
                 val ft = supportFragmentManager.beginTransaction()
@@ -179,6 +186,26 @@ class MainActivity : AppCompatActivity(),SplashFragment.OnLoginButtonPressedList
         setContentView(R.layout.activity_main)
         toolbar.title = "Available Offers"
         setSupportActionBar(toolbar)
+//      val lm = this.getSystemService(LOCATION_SERVICE) as LocationManager
+//var gps_enabled : Boolean = false;
+//var network_enabled: Boolean = false;
+//
+//try {
+//    gps_enabled = lm.isProviderEnabled(LocationManager.GPS_PROVIDER);
+//} catch(ex : Exception) {}
+//
+//try {
+//    network_enabled = lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+//} catch(ex : Exception ) {}
+        val locationProviders :String = Settings.Secure.getString(getContentResolver(), Settings.Secure.LOCATION_PROVIDERS_ALLOWED);
+        if (!TextUtils.isEmpty(locationProviders)) {
+            AlertDialog.Builder(this)
+                    .setTitle("This App requires Location Services")  // GPS not found
+                    .setMessage("Please hit yes to go to settings and enable location") // Want to enable?
+                    .setPositiveButton("yes", DialogInterface.OnClickListener { dialogInterface, i -> startActivity(Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS)) })
+                    .setNegativeButton("no", null)
+                    .show()
+        }
         initializeListeners()
 //
 //        fab.setOnClickListener { view ->
@@ -187,15 +214,7 @@ class MainActivity : AppCompatActivity(),SplashFragment.OnLoginButtonPressedList
 //        }
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
 
-        val locationManager = getSystemService(LOCATION_SERVICE) as LocationManager
-        if (!locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
-            AlertDialog.Builder(this)
-                    .setTitle("This App required Location Services")  // GPS not found
-                    .setMessage("Please hit yes to go to settings and enable location") // Want to enable?
-                    .setPositiveButton("yes", DialogInterface.OnClickListener { dialogInterface, i -> startActivity(Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS)) })
-                    .setNegativeButton("no", null)
-                    .show()
-        }
+
     }
     var filterItem : MenuItem? = null
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

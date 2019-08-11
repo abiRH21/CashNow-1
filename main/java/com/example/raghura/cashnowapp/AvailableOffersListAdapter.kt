@@ -148,7 +148,7 @@ class AvailableOffersListAdapter (var context: Context?, var listener: Available
 
         } else if(!userCurrency.equals("none") && !desiredCurrency.equals("none")) {
             quoteRef
-                    .orderBy(Offer.LAST_TOUCHED_KEY, Query.Direction.ASCENDING).whereEqualTo("accepted","F").whereEqualTo("desiredCurrency", desiredCurrency).whereEqualTo("userCurrency",userCurrency)
+                    .orderBy(Offer.LAST_TOUCHED_KEY, Query.Direction.ASCENDING).whereEqualTo("accepted","F").whereEqualTo("desiredCurrency", desiredCurrency).whereEqualTo("userCurrency", userCurrency)
 
 
                     .addSnapshotListener { snapshot: QuerySnapshot?, exception: FirebaseFirestoreException? ->

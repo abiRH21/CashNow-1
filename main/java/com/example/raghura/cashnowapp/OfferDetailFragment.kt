@@ -153,7 +153,7 @@ class OfferDetailFragment : Fragment() {
         //view.detail_distance_text_view.text = "Distance: ${offer?.distance} miles"
         view.detail_location_text_view.text = "Meet up Location: Gate 21, Terminal 3, Dubai International "
         view.detail_name_text_view.text = "by ${offer?.name}"
-        if (type == 1) {
+        if (type == 1 || offer!!.creatorUID!!.equals(uid)) {
             view.detail_button.visibility = View.INVISIBLE
             view.detail_location_text_view.text = "Meet up Location: Gate 21, Terminal 3, Dubai  \n "
         }

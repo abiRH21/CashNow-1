@@ -6,7 +6,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text=" User Currency"/>
+        android:text=" Desired Currency"/>
     <Spinner
         android:id="@+id/dialog_filter_user_currency_filter"
         android:layout_width="wrap_content"
@@ -18,7 +18,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text=" Desired Currency"/>
+        android:text="User Currency"/>
     <Spinner
         android:id="@+id/dialog_filter_desired_currency"
         android:layout_width="wrap_content"
