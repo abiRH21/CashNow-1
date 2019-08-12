@@ -25,10 +25,19 @@
     <string name="icon">Icon</string>
     <string-array name="currencies">
         <item>none</item>
-        <item>U.S Dollars</item>
-        <item>Rupees</item>
-        <item>Dirhams</item>
-        <item>Roubles</item>
-        <item>Riyals</item>
+        <item>U.S. Dollar (USD)</item>
+        <item>European Euro (EUR)</item>
+        <item>Japanese Yen (JPY)</item>
+        <item>Saudi Arabian Riyal (SAR)</item>
+        <item>British Pound (GBP</item>
+        <item>Swiss Franc (CHF)</item>
+        <item>Indian Rupee (INR)</item>
+        <item>Chinese Yuan (CNY)</item>
+        <item>Japanese Yen (JPY)</item>
+        <item>United Arab Emirates Dirham (AED)</item>
+        <item>Qatari Riyal (QAR)</item>
+        <item>South African Rand (ZAR)</item>
+        <item>Russian Ruble (RUB)</item>
+
     </string-array>
 </resources>
