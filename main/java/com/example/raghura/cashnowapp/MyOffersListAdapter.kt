@@ -99,7 +99,7 @@ class MyOffersListAdapter (var context: Context?, var listener: MyOffersListFrag
         view.dialog_add_desired_amount.setText(offer.desiredAmount)
         builder.setPositiveButton(android.R.string.ok) { _, _ ->
             edit(pos, view.dialog_add_user_amount.text.toString() , view.dialog_add_user_currency_spinner.getSelectedItem().toString(), view.dialog_add_desired_amount.text.toString(), view.dialog_add_desired_currency_spinner.getSelectedItem().toString())
-
+            Toast.makeText(context, "Successfully edited Offer", Toast.LENGTH_LONG).show()
         }
         builder.setNegativeButton(android.R.string.cancel , null)
         builder.show()
@@ -111,7 +111,7 @@ class MyOffersListAdapter (var context: Context?, var listener: MyOffersListFrag
         if(offer.accepted.equals("F")) {
 
             showEditDialog(offer, adapterPosition)
-           Toast.makeText(context, "Successfully edited Offer", Toast.LENGTH_LONG).show()
+
         }
         else {
             Toast.makeText(context, "This offer cannot be edited as it has already been accepted", Toast.LENGTH_LONG).show()

@@ -12,12 +12,14 @@ import com.google.firebase.firestore.*
 
 class AvailableOffersListAdapter (var context: Context?, var listener: AvailableOffersListFragment.OnOfferSelectedListener?, uid: String, userCurrency : String?, desiredCurrency: String? ) : RecyclerView.Adapter<AvailableOffersViewHolder>() {
     val offers = ArrayList<Offer>()
+    lateinit var userUID : String
     private val quoteRef = FirebaseFirestore
             .getInstance()
             .collection("offers")
     lateinit var Cuid : String
     lateinit var thisContext : Context
     init {
+        userUID = uid
         if(userCurrency.equals("none") && desiredCurrency.equals("none")) {
             quoteRef
                     .orderBy(Offer.LAST_TOUCHED_KEY, Query.Direction.ASCENDING).whereEqualTo("accepted", "F")//.whereEqualTo("desiredCurrency", "U.S Dollars")
@@ -200,7 +202,7 @@ class AvailableOffersListAdapter (var context: Context?, var listener: Available
         val view = LayoutInflater.from(context).inflate(R.layout.row_view_offer, parent, false)
 
         Gview = view
-        return AvailableOffersViewHolder(view, this , context)
+        return AvailableOffersViewHolder(view, this , context, userUID)
 
 
     }

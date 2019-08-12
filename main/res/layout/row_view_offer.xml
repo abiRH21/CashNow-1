@@ -4,7 +4,8 @@
     android:background="@color/credits_background"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginVertical="2dp"
+    android:layout_margin="4dp"
+    card_view:cardCornerRadius="10dp"
     android:padding="8dp">
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"

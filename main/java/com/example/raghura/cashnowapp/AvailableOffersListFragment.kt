@@ -35,8 +35,8 @@ private const val ARG_U_CURRENCY ="U_CURRENCY"
 private const val ARG_D_CURRENCY ="D_CURRENCY"
 class AvailableOffersListFragment : Fragment() {
     private var locationManager : LocationManager? = null
-    var userLongitude : String = ""
-    var userLatitude: String = ""
+    var userLongitude : Double = 0.0
+    var userLatitude: Double = 0.0
     private var user: FirebaseUser? = null
     private var uid: String? = null
     private var offerList : ArrayList<Offer>? = null
@@ -55,7 +55,7 @@ class AvailableOffersListFragment : Fragment() {
     ): View? {
         val recyclerView = inflater.inflate(R.layout.fragment_offers_list, container, false) as RecyclerView
         Log.d("XOXO", "$userLongitude $userLatitude")
-        adapter = AvailableOffersListAdapter(context, listener, "", userCurrency , desiredCurrency)
+        adapter = AvailableOffersListAdapter(context, listener, uid!!, userCurrency , desiredCurrency)
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.setHasFixedSize(true)
@@ -126,8 +126,8 @@ class AvailableOffersListFragment : Fragment() {
     private val locationListener: LocationListener = object : LocationListener {
         override fun onLocationChanged(location: Location) {
             Log.d("myTag","${location.longitude} ${location.latitude}")
-            userLongitude = location.longitude.toString()
-            userLatitude = location.latitude.toString()
+            userLongitude = location.longitude
+            userLatitude = location.latitude
            // latitude.setText("" + location.longitude + ":" + location.latitude)
             val result : FloatArray = FloatArray(10)
             Location.distanceBetween(location.latitude,location.longitude, 37.42199833333,-122.08400000, result)

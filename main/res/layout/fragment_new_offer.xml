@@ -11,6 +11,7 @@
     android:textSize="30sp"
     />
     <EditText
+        android:inputType="number"
         android:id="@+id/new_offer_amount_desired"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

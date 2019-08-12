@@ -15,8 +15,9 @@ import kotlinx.android.synthetic.main.row_view_offer.view.*
 import java.time.Duration
 import java.util.*
 
-class AvailableOffersViewHolder (itemView: View, adapter: AvailableOffersListAdapter, context : Context?) : RecyclerView.ViewHolder(itemView) {
+class AvailableOffersViewHolder (itemView: View, adapter: AvailableOffersListAdapter, context : Context?, uid : String) : RecyclerView.ViewHolder(itemView) {
     var userOffer : Offer? = null
+    lateinit var userUID : String
     lateinit var userContext: Context
     private val amountTextView = itemView.offer_amount_text_view as TextView
     private val distanceTextView = itemView.offer_distance_text_view as TextView
@@ -32,10 +33,15 @@ class AvailableOffersViewHolder (itemView: View, adapter: AvailableOffersListAda
             //latitude.setText("" + location.longitude + ":" + location.latitude);
             userLong = location.longitude
             userLat = location.latitude
-            Location.distanceBetween(userLat,userLong, userOffer!!.latitude.toDouble(),userOffer!!.longitude.toDouble(), result)
+            Location.distanceBetween(userLat,userLong, userOffer!!.latitude,userOffer!!.longitude, result)
             var number : Float =  1609.344F
             result[0] = result[0]/ number
-            distanceTextView.text = "Distance: ${result[0].toString()} miles"
+            if(userOffer!!.creatorUID != uid) {
+                distanceTextView.text = "Distance: ${result[0].toString()} miles"
+            }
+            else {
+                distanceTextView.text =""
+            }
             // result[0] is the distance i
 
             Log.d("OXOXO", "${result[0]} is the distance ")
@@ -45,6 +51,7 @@ class AvailableOffersViewHolder (itemView: View, adapter: AvailableOffersListAda
         override fun onProviderDisabled(provider: String) {}
     }
     init {
+        userUID = uid
         itemView.setOnClickListener {
             adapter.selectOfferAt(adapterPosition)
         }
@@ -124,7 +131,14 @@ class AvailableOffersViewHolder (itemView: View, adapter: AvailableOffersListAda
      //   Log.d("OXOXO","${result[0].toInt().toString()} is the distance ")
         var diff : String  = getDuration(offer.created , Date(System.currentTimeMillis()))
         amountTextView.text = "${offer.userAmount} ${offer.userCurrency} for ${offer.desiredAmount} ${offer.desiredCurrency}"
-        distanceTextView.text = "Calculating distance..."
+        if(userOffer!!.creatorUID == userUID)
+        {
+            distanceTextView.text =""
+
+        } else {
+            distanceTextView.text = "Calculating distance..."
+        }
+
         nameTextView.text = "by ${offer.name}"
         if (diff.equals("")){
             diff = "0 minutes ago"

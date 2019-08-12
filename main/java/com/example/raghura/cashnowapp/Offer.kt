@@ -19,8 +19,8 @@ data class Offer (
         var creatorUID: String = "",
         var receiverUID:String ="",
         var accepted: String = "",
-        var longitude: String = "",
-        var latitude: String = "",
+        var longitude: Double = 0.0,
+        var latitude: Double = 0.0,
         var created: Date = Date(System.currentTimeMillis())
 ) : Parcelable
 {
