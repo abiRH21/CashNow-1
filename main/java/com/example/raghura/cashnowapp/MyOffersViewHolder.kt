@@ -19,6 +19,10 @@ class MyOffersViewHolder (itemView: View, adapter: MyOffersListAdapter) : Recycl
         itemView.setOnClickListener{
             adapter.selectOfferAt(adapterPosition)
         }
+        itemView.setOnLongClickListener{
+            adapter.LPselectOffer(adapterPosition)
+            true
+        }
     }
     private fun getDuration(d1: Date, d2: Date): String {
         var diff = Duration.between(d1.toInstant(), d2.toInstant())
@@ -82,7 +86,13 @@ class MyOffersViewHolder (itemView: View, adapter: MyOffersListAdapter) : Recycl
         //   Log.d("OXOXO","${result[0].toInt().toString()} is the distance ")
         var diff : String  = getDuration(offer.created , Date(System.currentTimeMillis()))
         amountTextView.text = "${offer.userAmount} ${offer.userCurrency} for ${offer.desiredAmount} ${offer.desiredCurrency}"
-        distanceTextView.text = ""
+        if (offer.accepted.equals("T")) {
+
+            distanceTextView.text = "Status: Accepted"
+        }
+        else {
+            distanceTextView.text = "Status: Not Accepted "
+        }
         nameTextView.text = "by ${offer.name}"
         if (diff.equals("")){
             diff = "0 minutes ago"

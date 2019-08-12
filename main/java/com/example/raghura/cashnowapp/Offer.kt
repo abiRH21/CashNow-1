@@ -10,18 +10,18 @@ import java.util.*
 
 @Parcelize
 data class Offer (
-        val userAmount: String = "",
-        val userCurrency : String ="",
-        val desiredAmount: String ="",
-        val desiredCurrency: String = "",
-        val distance: String = "",
-        val name: String = "",
-        val creatorUID: String = "",
-        val receiverUID:String ="",
-        val accepted: String = "",
-        val longitude: String = "",
-        val latitude: String = "",
-        val created: Date = Date(System.currentTimeMillis())
+        var userAmount: String = "",
+        var userCurrency : String ="",
+        var desiredAmount: String ="",
+        var desiredCurrency: String = "",
+        var distance: String = "",
+        var name: String = "",
+        var creatorUID: String = "",
+        var receiverUID:String ="",
+        var accepted: String = "",
+        var longitude: String = "",
+        var latitude: String = "",
+        var created: Date = Date(System.currentTimeMillis())
 ) : Parcelable
 {
     @get:Exclude
