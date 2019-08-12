@@ -95,6 +95,7 @@ class MyOffersListAdapter (var context: Context?, var listener: MyOffersListFrag
         userCurrencyspinner.adapter = ArrayAdapter(context, R.layout.support_simple_spinner_dropdown_item, currentContext.resources.getStringArray(R.array.currencies)) as SpinnerAdapter?
         desiredCurrencyspinner.adapter = ArrayAdapter(context, R.layout.support_simple_spinner_dropdown_item, currentContext.resources.getStringArray(R.array.currencies)) as SpinnerAdapter?
         builder.setView(view)
+        builder.setTitle("Edit Offer")
         view.dialog_add_user_amount.setText(offer.userAmount)
         view.dialog_add_desired_amount.setText(offer.desiredAmount)
         builder.setPositiveButton(android.R.string.ok) { _, _ ->

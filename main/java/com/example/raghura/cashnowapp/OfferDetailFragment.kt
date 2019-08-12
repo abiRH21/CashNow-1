@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import com.google.firebase.firestore.*
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_offer_detail.view.*
 
 private const val ARG_DOC = "OFFER"
@@ -182,6 +183,11 @@ class OfferDetailFragment : Fragment() {
                     startActivity(intent)
         }
         return view
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        (activity as MainActivity).fab.show()
     }
 
 }

@@ -29,8 +29,6 @@ class AvailableOffersViewHolder (itemView: View, adapter: AvailableOffersListAda
     val result : FloatArray = FloatArray(10)
     private val locationListener: LocationListener = object : LocationListener {
         override fun onLocationChanged(location: Location) {
-            Log.d("OXOXO","from View Holder ${location.longitude} ${location.latitude}")
-            //latitude.setText("" + location.longitude + ":" + location.latitude);
             userLong = location.longitude
             userLat = location.latitude
             Location.distanceBetween(userLat,userLong, userOffer!!.latitude,userOffer!!.longitude, result)
@@ -42,9 +40,7 @@ class AvailableOffersViewHolder (itemView: View, adapter: AvailableOffersListAda
             else {
                 distanceTextView.text =""
             }
-            // result[0] is the distance i
 
-            Log.d("OXOXO", "${result[0]} is the distance ")
         }
         override fun onStatusChanged(provider: String, status: Int, extras: Bundle) {}
         override fun onProviderEnabled(provider: String) {}
@@ -122,7 +118,7 @@ class AvailableOffersViewHolder (itemView: View, adapter: AvailableOffersListAda
         try {
             // Request location updates
             locationManager?.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0L, 0f, locationListener)
-            //Log.d("OXOXO","${userLat}")
+
         } catch(ex: SecurityException) {
             Log.d("myTag", "Security Exception, no location available");
         }

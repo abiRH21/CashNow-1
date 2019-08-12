@@ -61,6 +61,7 @@ class MainActivity : AppCompatActivity(),SplashFragment.OnLoginButtonPressedList
     }
     lateinit var Guser : FirebaseUser
     private fun initializeListeners() {
+        fab.show()
         // TODO: Create an AuthStateListener that passes the UID
         // to the MovieQuoteFragment if the user is logged in
         // and goes back to the Splash fragment otherwise.
@@ -77,12 +78,17 @@ class MainActivity : AppCompatActivity(),SplashFragment.OnLoginButtonPressedList
                 Log.d(Constants.TAG,"Phone: ${user.phoneNumber}")
                 Log.d(Constants.TAG,"Photo: ${user.photoUrl}")
                // Toast.makeText(this,"Welcome ${user!!.displayName}!", Toast.LENGTH_LONG).show()
+                navigation.visibility = View.VISIBLE
+                fab.show()
 
                 val ft = supportFragmentManager.beginTransaction()
                 ft.replace(R.id.fragment_container, AvailableOffersListFragment.newInstance(user.uid , false , Guser,"none","none"))
                 ft.commitAllowingStateLoss()
 
             } else {
+
+                navigation.visibility = View.INVISIBLE
+                fab.hide()
                 switchToSplashFragment()
             }
         }
@@ -94,6 +100,7 @@ class MainActivity : AppCompatActivity(),SplashFragment.OnLoginButtonPressedList
 
     }
     private fun switchToSplashFragment() {
+
         val ft = supportFragmentManager.beginTransaction()
         ft.replace(R.id.fragment_container, SplashFragment())
         ft.commit()
@@ -108,7 +115,6 @@ class MainActivity : AppCompatActivity(),SplashFragment.OnLoginButtonPressedList
         val providers = arrayListOf(
 
                 AuthUI.IdpConfig.EmailBuilder().build(),
-                AuthUI.IdpConfig.PhoneBuilder().build(),
                 AuthUI.IdpConfig.GoogleBuilder().build())
         val loginIntent =  AuthUI.getInstance()
                 .createSignInIntentBuilder()
@@ -123,6 +129,7 @@ class MainActivity : AppCompatActivity(),SplashFragment.OnLoginButtonPressedList
     }
 
     override fun onOfferSelectedAvailableOffers(offer: Offer) {
+        fab.hide()
         var offerFragment: OfferDetailFragment? = null
         offerFragment = OfferDetailFragment.newInstance(offer,0, Guser.uid)
         if (Fbool == true) {
@@ -217,10 +224,12 @@ class MainActivity : AppCompatActivity(),SplashFragment.OnLoginButtonPressedList
         }
     }
     var filterItem : MenuItem? = null
+    var logOutItem : MenuItem? = null
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.menu_main, menu)
         filterItem =  menu.findItem(R.id.action_settings)
+        logOutItem = menu.findItem(R.id.action_logout)
         return true
     }
 
